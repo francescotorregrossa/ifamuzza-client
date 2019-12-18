@@ -8,85 +8,65 @@ import {
   TextInput,
   StatusBar,
 } from 'react-native';
-import { 
-  Button,
-} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Login from './Login';
-
 import Profile from './Profile';
 
 class App extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      signIn:false
-    }
+      signIn: false,
+    };
   }
 
-  isLogged(){
-    this.state = {
-    signIn: true
-    }
-  }
+  isLogged = () => {
+    this.setState({
+      signIn: true,
+    });
+  };
 
   render() {
-
-    if(this.state.signIn){
-      return<Login/>
+    if (this.state.signIn) {
+      return <Login />;
     }
     return (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-            <Button
-              style={styles.signbuttonstyle}
-              onPress={this.isLogged}
-              type='outline'
-              icon={
-              <Icon 
-              name='user'
-              color='black'
-              size={25}
-              />
-
-              }
-              />
-              <Text style={styles.logostyle}>iFamuzza</Text>
+          <Button
+            style={styles.signbuttonstyle}
+            onPress={this.isLogged}
+            type="outline"
+            icon={<Icon name="user" color="black" size={25} />}
+          />
+          <Text style={styles.logostyle}>iFamuzza</Text>
         </SafeAreaView>
       </>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
-   container: {
-     alignItems: 'center',
-     justifyContent: 'center',
-
-   }
-   ,
-
-   signbuttonstyle: {
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  signbuttonstyle: {
     flex: 1,
     alignItems: 'center',
     borderColor: 'transparent',
-    position:'absolute',
-    left:170,
-    top:75
-   }
-   ,
-
-   logostyle: {
-
+    position: 'absolute',
+    left: 170,
+    top: 75,
+  },
+  logostyle: {
     fontSize: 35,
     fontWeight: 'bold',
     fontFamily: 'AppleSDGothicNeo-Light',
-
-   }
+  },
 });
 
 export default App;
-
