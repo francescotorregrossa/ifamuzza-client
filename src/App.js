@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,30 +10,49 @@ import {
 } from 'react-native';
 import { 
   Button,
-  ButtonGroup,
-  Icon
 } from 'react-native-elements';
 
-import Login from './Login'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Login from './Login';
 
 class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      signIn:false
+    }
+  }
+
+  isLogged(){
+    this.state = {
+    signIn: true
+    }
+  }
+
   render() {
 
+    if(this.state.signIn){
+      return<Login/>
+    }
     return (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <Button style={styles.mainbutton}
-            icon={
-            <Icon 
-            name='sign-in-alt' 
-            type='fontawesome'
-            color='white' />
+            <Button
+              style={styles.signbuttonstyle}
+              onPress={this.isLogged}
+              type='outline'
+              icon={
+              <Icon 
+              name='user'
+              color='black'
+              size={25}
+              />
 
-            }
-            
-          />
-
+              }
+              />
+              <Text style={styles.logostyle}>iFamuzza</Text>
         </SafeAreaView>
       </>
     );
@@ -44,13 +63,25 @@ const styles = StyleSheet.create({
    container: {
      alignItems: 'center',
      justifyContent: 'center',
-     backgroundColor: '#ecf0f1',
-   },
-   mainbutton: {
+
+   }
+   ,
+
+   signbuttonstyle: {
     flex: 1,
-    flexDirection: 'row-reverse',
-    height: 50,
-    width: 50,
+    alignItems: 'center',
+    borderColor: 'transparent',
+    position:'absolute',
+    left:170,
+    top:75
+   }
+   ,
+
+   logostyle: {
+
+    fontSize: 35,
+    fontWeight: 'bold',
+    fontFamily: 'AppleSDGothicNeo-Light',
 
    }
 });
