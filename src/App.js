@@ -1,46 +1,21 @@
 import React from 'react';
 import {View} from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import Home from './Home';
 import Login from './Login';
 import Profile from './Profile';
 import pages from './pages';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: pages.home,
-    };
-  }
+const AppNavigator = createStackNavigator(
+  {
+    [pages.home]: Home,
+    [pages.login]: Login,
+  },
+  {
+    initialRouteName: pages.home,
+  },
+);
 
-  onRequestPage = (src, dest) => {
-    console.log(`${src} requested ${dest}`);
-    this.setState({currentPage: dest});
-  };
-
-  render() {
-    const {currentPage} = this.state;
-    return (
-      <>
-        <Home
-          pageName={pages.home}
-          currentPage={currentPage}
-          onRequestPage={this.onRequestPage}
-        />
-        <Login
-          pageName={pages.login}
-          currentPage={currentPage}
-          onRequestPage={this.onRequestPage}
-        />
-        <Profile
-          pageName={pages.profile}
-          currentPage={currentPage}
-          onRequestPage={this.onRequestPage}
-        />
-      </>
-    );
-  }
-}
-
-export default App;
+export default createAppContainer(AppNavigator);

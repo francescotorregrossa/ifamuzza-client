@@ -9,10 +9,9 @@ import {
 } from 'react-native';
 import {Input, Icon} from 'react-native-elements';
 
-import NavigationComponent from './NavigationComponent';
 import pages from './pages';
 
-class Profile extends NavigationComponent {
+class Profile extends React.Component {
   render() {
     return this.shouldRender() ? <Text>ciao</Text> : null;
   }

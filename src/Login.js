@@ -12,16 +12,15 @@ import {
   button,
 } from 'react-native';
 
-import NavigationComponent from './NavigationComponent';
 import pages from './pages';
 
-class Login extends NavigationComponent {
+class Login extends React.Component {
   emailIcon = () => <Icon name="envelope" size={20} color="black" />;
 
   passIcon = () => <Icon name="lock" size={25} color="black" />;
 
   render() {
-    return this.shouldRender() ? (
+    return (
       <View style={styles.container}>
         <View>
           <Text style={styles.text}>Your Email Address</Text>
@@ -36,12 +35,12 @@ class Login extends NavigationComponent {
           />
         </View>
         <Button
-          onPress={() => this.requestPage(pages.home)}
+          onPress={() => this.props.navigation.goBack()}
           type="outline"
           icon={<Icon name="user" color="black" size={25} />}
         />
       </View>
-    ) : null;
+    );
   }
 }
 
