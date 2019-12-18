@@ -16,6 +16,8 @@ import {
 
 import Login from './Login'
 
+import Profile from './Profile';
+
 class App extends React.Component {
   render() {
 
