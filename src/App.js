@@ -15,6 +15,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Login from './Login';
 
+import Profile from './Profile';
+
 class App extends React.Component {
 
   constructor(props){
