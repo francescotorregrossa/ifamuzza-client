@@ -14,6 +14,8 @@ import {
   Icon
 } from 'react-native-elements';
 
+import Login from './Login'
+
 class App extends React.Component {
   render() {
 
@@ -54,3 +56,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
