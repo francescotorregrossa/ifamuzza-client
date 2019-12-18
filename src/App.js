@@ -1,72 +1,46 @@
-import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  TextInput,
-  StatusBar,
-} from 'react-native';
-import {Button} from 'react-native-elements';
+import React from 'react';
+import {View} from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Home from './Home';
 import Login from './Login';
 import Profile from './Profile';
+import pages from './pages';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signIn: false,
+      currentPage: pages.home,
     };
   }
 
-  isLogged = () => {
-    this.setState({
-      signIn: true,
-    });
+  onRequestPage = (src, dest) => {
+    console.log(`${src} requested ${dest}`);
+    this.setState({currentPage: dest});
   };
 
   render() {
-    if (this.state.signIn) {
-      return <Login />;
-    }
-    return (
-      <>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView style={styles.container}>
-          <Button
-            style={styles.signbuttonstyle}
-            onPress={this.isLogged}
-            type="outline"
-            icon={<Icon name="user" color="black" size={25} />}
+    const {currentPage} = this.state;
+    switch (currentPage) {
+      case pages.home:
+        return (
+          <Home pageName={pages.home} onRequestPage={this.onRequestPage} />
+        );
+      case pages.login:
+        return (
+          <Login pageName={pages.login} onRequestPage={this.onRequestPage} />
+        );
+      case pages.profile:
+        return (
+          <Profile
+            pageName={pages.profile}
+            onRequestPage={this.onRequestPage}
           />
-          <Text style={styles.logostyle}>iFamuzza</Text>
-        </SafeAreaView>
-      </>
-    );
+        );
+      default:
+        return <View />;
+    }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  signbuttonstyle: {
-    flex: 1,
-    alignItems: 'center',
-    borderColor: 'transparent',
-    position: 'absolute',
-    left: 170,
-    top: 75,
-  },
-  logostyle: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    fontFamily: 'AppleSDGothicNeo-Light',
-  },
-});
 
 export default App;
