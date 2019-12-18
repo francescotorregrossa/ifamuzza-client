@@ -1,4 +1,5 @@
 import React from 'react';
+import {Input, Icon} from 'react-native-elements';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,9 +10,25 @@ import {
 } from 'react-native';
 
 class Login extends React.Component {
+    
+    loginIcon = () => <Icon
+        name='user'
+        size={24}
+        color='black'
+    />;
+
     render(){
         return (
-            <Text>login</Text>
+            <View >
+                <Input style={{padding: 30}}
+                    placeholder='INPUT WITH CUSTOM ICON'
+                    //leftIcon={this.loginIcon}
+                />
+                <Input style={{padding: }}
+                    placeholder='INPUT WITH CUSTOM ICON'
+                    //leftIcon={this.loginIcon}
+                />
+            </View>
         );
     }
     
