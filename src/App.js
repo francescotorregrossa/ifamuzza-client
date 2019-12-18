@@ -8,6 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 
+import Login from './Login'
+
 class App extends React.Component {
   render() {
     return (
@@ -26,3 +28,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
