@@ -8,6 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 
+import Profile from './Profile';
+
 class App extends React.Component {
   render() {
     return (
