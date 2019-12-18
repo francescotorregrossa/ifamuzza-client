@@ -18,7 +18,7 @@ import pages from './pages';
 
 class Home extends NavigationComponent {
   render() {
-    return (
+    return this.shouldRender() ? (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
@@ -31,7 +31,7 @@ class Home extends NavigationComponent {
           <Text style={styles.logostyle}>iFamuzza</Text>
         </SafeAreaView>
       </>
-    );
+    ) : null;
   }
 }
 

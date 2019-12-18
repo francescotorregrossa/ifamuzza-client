@@ -21,25 +21,25 @@ class App extends React.Component {
 
   render() {
     const {currentPage} = this.state;
-    switch (currentPage) {
-      case pages.home:
-        return (
-          <Home pageName={pages.home} onRequestPage={this.onRequestPage} />
-        );
-      case pages.login:
-        return (
-          <Login pageName={pages.login} onRequestPage={this.onRequestPage} />
-        );
-      case pages.profile:
-        return (
-          <Profile
-            pageName={pages.profile}
-            onRequestPage={this.onRequestPage}
-          />
-        );
-      default:
-        return <View />;
-    }
+    return (
+      <>
+        <Home
+          pageName={pages.home}
+          currentPage={currentPage}
+          onRequestPage={this.onRequestPage}
+        />
+        <Login
+          pageName={pages.login}
+          currentPage={currentPage}
+          onRequestPage={this.onRequestPage}
+        />
+        <Profile
+          pageName={pages.profile}
+          currentPage={currentPage}
+          onRequestPage={this.onRequestPage}
+        />
+      </>
+    );
   }
 }
 

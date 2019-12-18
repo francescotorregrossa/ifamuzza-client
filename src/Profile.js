@@ -14,7 +14,7 @@ import pages from './pages';
 
 class Profile extends NavigationComponent {
   render() {
-    return <Text>ciao</Text>;
+    return this.shouldRender() ? <Text>ciao</Text> : null;
   }
 }
 

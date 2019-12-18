@@ -21,7 +21,7 @@ class Login extends NavigationComponent {
   passIcon = () => <Icon name="lock" size={25} color="black" />;
 
   render() {
-    return (
+    return this.shouldRender() ? (
       <View style={styles.container}>
         <View>
           <Text style={styles.text}>Your Email Address</Text>
@@ -41,7 +41,7 @@ class Login extends NavigationComponent {
           icon={<Icon name="user" color="black" size={25} />}
         />
       </View>
-    );
+    ) : null;
   }
 }
 
