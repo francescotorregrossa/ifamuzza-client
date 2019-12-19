@@ -37,7 +37,7 @@ class Login extends React.Component {
         <Button
           onPress={() => this.props.navigation.goBack()}
           type="outline"
-          icon={<Icon name="user" color="black" size={25} />}
+          icon={<Icon name="arrow-circle-left" color="black" size={25} />}
         />
       </View>
     );
