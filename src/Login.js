@@ -16,51 +16,66 @@ import NavigationComponent from './NavigationComponent';
 import pages from './pages';
 
 class Login extends NavigationComponent {
-  emailIcon = () => <Icon name="envelope" size={20} color="black" />;
-
-  passIcon = () => <Icon name="lock" size={25} color="black" />;
 
   render() {
     return this.shouldRender() ? (
       <View style={styles.container}>
-        <View>
-          <Text style={styles.text}>Your Email Address</Text>
-        </View>
-        <Input placeholder="  email@address.com" leftIcon={this.emailIcon} />
-        <View>
-          <Text style={styles.text2}>Password</Text>
-          <Input
-            placeholder="  password"
-            leftIcon={this.passIcon}
-            secureTextEntry
-          />
-        </View>
-        <Button
-          onPress={() => this.requestPage(pages.home)}
-          type="outline"
-          icon={<Icon name="user" color="black" size={25} />}
+          <View style= {styles.input}>
+          <Input 
+          placeholder="  email@address.com" 
+          label = " Email" 
+          labelStyle = {{
+             color: 'black',
+             fontSize: 20,
+          }}
+          leftIcon={{
+            type:'font-awesome',
+            name: 'envelope',
+            color: 'gray',
+            containerStyle: {marginRight: 16},
+        }}
+           />             
+          </View>
+          <View style= {styles.input}>
+          <Input 
+          placeholder="  password" 
+           label = " Password" 
+           secureTextEntry
+           labelStyle = {{
+              color: 'black',
+              fontSize: 20,
+          }}
+          leftIcon={{
+            type:'font-awesome',
+            name: 'lock',
+            color: 'gray',
+            size: 30,
+            containerStyle: {marginRight: 16},  
+         }}
         />
+        </View>
+        <View style= {styles.input}>
+        <Button 
+                style={styles.button1}
+                onPress={() => this.requestPage(pages.home)}
+                type="outline"
+                title= "ACCEDI"
+          />           
+        </View>
       </View>
     ) : null;
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+    container: {
     flex: 1,
     flexDirection: 'column',
-    padding: 20,
+    padding:20 ,
   },
+    input:{
+        marginTop: 30
+    }
 
-  text: {
-    padding: 20,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  text2: {
-    padding: 20,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
 });
 export default Login;
