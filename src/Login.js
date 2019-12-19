@@ -75,7 +75,7 @@ class Login extends React.Component {
          <Button 
          onPress={() => this.props.navigation.navigate(pages.profile)}
          type ="clear"
-         title= "Sing in" 
+         title= "Sign in" 
          titleStyle = {{
            marginTop: 13,
           fontWeight: 'bold',
