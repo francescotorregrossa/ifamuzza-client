@@ -24,7 +24,7 @@ class Profile extends React.Component {
           <ScrollView>
           <View>
             <Text style={{fontSize: 25, textAlign: 'center'}}>
-              Register on <Text style={{color:'red', fontWeight:'bold', fontStyle:'italic'}}> iFamuzza </Text>
+              Register on <Text style={{color:'blue', fontWeight:'bold'}}>iFamuzza </Text>
             </Text>
           </View>
           <Input placeholder="Enter your email" leftIcon={this.emailIcon} />
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   underline: {textDecorationLine: 'underline',
-              color: 'red',
+              color: 'blue',
               textAlign: 'center',
               },
   bold: {fontWeight: 'bold'},
