@@ -8,7 +8,7 @@ import {
   TextInput,
   StatusBar,
 } from 'react-native';
-import {Input,Button} from 'react-native-elements';
+import {SearchBar,Input,Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './Login';
 import Profile from './Profile';
@@ -16,8 +16,15 @@ import pages from './pages';
 
 class Home extends React.Component {
   SearchIcon = () => <Icon name="md-search" color="black" size={25}/>;
-          
+
+  state ={
+    search: "",
+  };
+  updateSearch = (search) => {
+    this.setState({ search });
+  };
   render() {
+    const { search } = this.state;
     return (
       <>
           <StatusBar barStyle="dark-content" />
@@ -36,16 +43,15 @@ class Home extends React.Component {
                 type="outline"
                 icon={<Icon name="md-person" color="black" size={25} />}
               />
-
-            </View>            
-              <Input
+            </View>  
+            <Input
+                //round
+                rightIcon={this.SearchIcon}
                 placeholder="Cerca il tuo locale preferito.."
-                rightIcon={this.SearchIcon} //rendere la lente cliccabile
+                onChangeText={this.updateSearch}
+                value={this.state.search}
               />
 
-            <View>
-
-            </View>
           </SafeAreaView>
       </>
     );
@@ -68,7 +74,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'AppleSDGothicNeo-Light',
     right: 20,
     
   },
