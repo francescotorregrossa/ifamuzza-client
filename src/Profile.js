@@ -13,6 +13,7 @@ import {
     Header,
 } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome'
+import pages from './pages';
 
   class Profile extends React.Component{
     emailIcon = () => <Icon
