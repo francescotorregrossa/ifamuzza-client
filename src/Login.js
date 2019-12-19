@@ -14,7 +14,7 @@ import {
 
 import pages from './pages';
 
-class Login extends NavigationComponent {
+class Login extends React.Component {
 
   render() {
     return (
@@ -37,7 +37,7 @@ class Login extends NavigationComponent {
           </View>
           <View style= {styles.input}>
           <Input 
-          placeholder="  password" 
+           placeholder="  password" 
            label = " Password" 
            secureTextEntry
            labelStyle = {{
@@ -55,11 +55,34 @@ class Login extends NavigationComponent {
         </View>
         <View style= {styles.input}>
         <Button 
-                style={styles.button1}
-                onPress={() => this.requestPage(pages.home)}
-                type="outline"
-                title= "ACCEDI"
+          onPress={() => this.props.navigation.navigate(pages.home)}
+          type="outline"
+          title= "LOGIN"
+          titleStyle = {{
+            fontWeight: 'bold',
+            fontSize: 20
+          }}
           />           
+        </View >
+        <View style = {{
+          flexDirection: "row"}}> 
+         <Text style={{
+           marginTop: 25,
+           textAlign: 'auto', 
+           fontSize: 18}}>
+           Aren't you registered yet?
+         </Text> 
+         <Button 
+         onPress={() => this.props.navigation.navigate(pages.profile)}
+         type ="clear"
+         title= "Sing in" 
+         titleStyle = {{
+           marginTop: 13,
+          fontWeight: 'bold',
+          fontSize: 20,
+          textDecorationLine: 'underline'
+        }}         
+         /> 
         </View>
       </View>
     );
@@ -70,11 +93,12 @@ const styles = StyleSheet.create({
     container: {
     flex: 1,
     flexDirection: 'column',
-    padding:20 ,
+    padding:10 ,
   },
     input:{
-        marginTop: 30
-    }
+        marginTop: 25
+    },
+
 
 });
 export default Login;
