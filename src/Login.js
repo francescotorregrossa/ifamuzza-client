@@ -12,13 +12,12 @@ import {
   button,
 } from 'react-native';
 
-import NavigationComponent from './NavigationComponent';
 import pages from './pages';
 
 class Login extends NavigationComponent {
 
   render() {
-    return this.shouldRender() ? (
+    return (
       <View style={styles.container}>
           <View style= {styles.input}>
           <Input 
@@ -63,7 +62,7 @@ class Login extends NavigationComponent {
           />           
         </View>
       </View>
-    ) : null;
+    );
   }
 }
 
