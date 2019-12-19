@@ -12,6 +12,7 @@ const AppNavigator = createStackNavigator(
   {
     [pages.home]: Home,
     [pages.login]: Login,
+    [pages.profile]: Profile,
   },
   {
     initialRouteName: pages.home,
