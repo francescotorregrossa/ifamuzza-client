@@ -20,8 +20,9 @@ class Home extends React.Component {
   state ={
     search: "",
   };
-  updateSearch = (search) => {
-    this.setState({ search });
+  updateSearch = (value) => {
+    this.setState({ 
+      search: value });
   };
   render() {
     const { search } = this.state;
@@ -44,14 +45,19 @@ class Home extends React.Component {
                 icon={<Icon name="md-person" color="black" size={25} />}
               />
             </View>  
-            <Input
-                //round
-                rightIcon={this.SearchIcon}
+            <View style={styles.searchbutton}>
+            <TextInput
+                style={styles.input}
+                round
                 placeholder="Cerca il tuo locale preferito.."
                 onChangeText={this.updateSearch}
                 value={this.state.search}
               />
-
+              <Button 
+              type="outline"
+              icon={<Icon name="md-search" color="black" size={25} />}
+              />
+            </View>
           </SafeAreaView>
       </>
     );
@@ -88,6 +94,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     right: 125,
+  },
+  searchbutton: {
+    flexDirection: 'row',
+    borderColor: 'black',
+    borderWidth: 1,
+
+  },
+  input:{
+    width: '80%',
   },
 });
 
