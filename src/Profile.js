@@ -7,7 +7,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {Input, Button, Header,} from 'react-native-elements';
+import {Input, Button,} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import pages from './pages';
 import Login from './Login';
@@ -16,7 +16,18 @@ class Profile extends React.Component {
   emailIcon = () => <Icon name="envelope" size={20} color="black"/>;
   passIcon = () => <Icon name="lock" size={20} color="black" />;
 
+  state ={
+    insert: "",
+  };
+  updateSearch = (value) => {
+    this.setState({ 
+      insert: value, 
+      insertList: []
+    });
+  };
+
   render() {
+    const {insert} = this.state;
     return (
       <>
         
@@ -24,31 +35,52 @@ class Profile extends React.Component {
           <ScrollView>
           <View>
             <Text style={{fontSize: 25, textAlign: 'center'}}>
-              Register on <Text style={{color:'blue', fontWeight:'bold'}}>iFamuzza </Text>
+              Register on <Text style={{color:'blue', fontWeight:'bold'}} 
+              onPress={() => this.props.navigation.navigate(pages.home)}>iFamuzza </Text>
             </Text>
           </View>
-          <Input placeholder="Enter your email" leftIcon={this.emailIcon} />
+          <Input placeholder="Enter your email" leftIcon={this.emailIcon} 
+                  onChangeText={this.updateSearch}
+                  value={this.state.insert}/>
           <Input
             placeholder="Enter your password"
+            onChangeText={this.updateSearch}
+            value={this.state.insert}
             secureTextEntry
             leftIcon={this.passIcon}
           />
           <Input
             placeholder="Confirm your password"
+            onChangeText={this.updateSearch}
+            value={this.state.insert}
             secureTextEntry
             leftIcon={this.passIcon}
           />
             <Text style={{padding: 10, fontSize: 20}}> Optional </Text>
-          <Input placeholder="Name" />
-          <Input placeholder="Surname" />
-          <Input placeholder="Phone" />
-          <Input placeholder="Allergies" />
-          <Input placeholder="Shipping address" />
-          <Input placeholder="Payment method" />
+          <Input placeholder="Name"
+                onChangeText={this.updateSearch}
+                value={this.state.insert} />
+          <Input placeholder="Surname" 
+                onChangeText={this.updateSearch}
+                value={this.state.insert} />
+          <Input placeholder="Phone" 
+                onChangeText={this.updateSearch}
+                value={this.state.insert} />
+          <Input placeholder="Allergies"
+                onChangeText={this.updateSearch}
+                value={this.state.insert} />
+          <Input placeholder="Shipping address" 
+                onChangeText={this.updateSearch}
+                value={this.state.insert}/>
+          <Input placeholder="Payment method"
+                onChangeText={this.updateSearch}
+                value={this.state.insert} />
           <View style={{borderRadius: 70, padding: 10}}>
             <Button title="Create account" type="solid" />
           </View>
-          <Text style={styles.text2}>Are you already registered on iFamuzza?  <Text style={styles.underline} onPress={() => this.props.navigation.navigate(pages.login)}> Login </Text></Text>
+          <Text style={styles.text2}>Are you already registered on iFamuzza?  
+          <Text style={styles.underline} onPress={() => this.props.navigation.navigate(pages.login)}> 
+          Login </Text></Text>
           </ScrollView>
         </SafeAreaView>
       </>
