@@ -15,25 +15,39 @@ import Profile from './Profile';
 import pages from './pages';
 
 class Home extends React.Component {
-  SearchIcon = () => <Icon name="md-search" color="black" size={25}/>;
-
   state ={
     search: "",
   };
   updateSearch = (value) => {
     this.setState({ 
-      search: value });
+      search: value,
+      searchList: [],
+    });
   };
+
+  addSearch = () => {
+      if(this.state.search.trim()===''){
+        return
+      }
+      this.setState(prevState => {
+        return {
+          searchList: prevState.searchList.concat(prevState.search)
+        }
+      })
+      this.setState({search: ""})
+  }
+
   render() {
     const { search } = this.state;
+
     return (
       <>
-          <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" />
           <SafeAreaView style={styles.container}>
             <View style={styles.logoview}> 
             <Button
                 style={styles.menustyle}
-              //aggiungere apertura menu(info: about us, contact us , ..) onPress={() => }
+              //aggiungere apertura menu(info: about us, contact us , ..) onPress={() => } 
                 type="outline"
                 icon={<Icon name="md-menu" color="black" size={25} />}
               />
@@ -48,16 +62,16 @@ class Home extends React.Component {
             <View style={styles.searchbutton}>
             <TextInput
                 style={styles.input}
-                round
-                placeholder="Cerca il tuo locale preferito.."
+                placeholder="Search your favourite restaurant.."
                 onChangeText={this.updateSearch}
                 value={this.state.search}
               />
               <Button 
               type="outline"
               icon={<Icon name="md-search" color="black" size={25} />}
+              onPress={this.addSearch}
               />
-            </View>
+            </View> 
           </SafeAreaView>
       </>
     );
@@ -99,7 +113,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderColor: 'black',
     borderWidth: 1,
-
+    borderRadius: 8,
   },
   input:{
     width: '80%',
