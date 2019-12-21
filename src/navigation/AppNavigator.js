@@ -8,9 +8,15 @@ import pages from '../pages';
 
 const StackNav = createStackNavigator(
   {
-    [pages.home]: HomeScreen,
-    [pages.login]: Login,
-    [pages.signup]: Signup,
+    [pages.home]: {
+      screen: HomeScreen,
+    },
+    [pages.login]: {
+      screen: Login,
+    },
+    [pages.signup]: {
+      screen: Signup,
+    },
   },
   {
     // headerMode: 'screen',
@@ -20,7 +26,9 @@ const StackNav = createStackNavigator(
 
 const DrawerNav = createDrawerNavigator(
   {
-    [pages.home]: StackNav,
+    [pages.home]: {
+      screen: StackNav,
+    },
   },
   {
     // contentComponent: props => <DrawerScreen {...props} />,

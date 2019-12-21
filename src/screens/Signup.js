@@ -16,9 +16,12 @@ class Signup extends React.Component {
 
   passIcon = () => <Icon name="lock" size={20} color="black" />;
 
-  state = {
-    insert: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      insert: '',
+    };
+  }
 
   updateSearch = value => {
     this.setState({

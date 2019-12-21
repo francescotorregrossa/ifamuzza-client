@@ -7,16 +7,42 @@ import {
   Text,
   TextInput,
   StatusBar,
+  Dimensions,
 } from 'react-native';
-import {SearchBar, Input, Button} from 'react-native-elements';
+import {SearchBar, Input, Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DrawerActions from 'react-navigation';
 import pages from '../pages';
 
+const screenWidth = Math.round(Dimensions.get('window').width);
+
 class HomeScreen extends React.Component {
-  state = {
-    search: '',
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: () => <Text style={styles.logostyle}>iFamuzza</Text>,
+      headerLeft: () => (
+        <Button
+          type="clear"
+          onPress={() => navigation.openDrawer()}
+          icon={{name: 'menu', type: 'Ionicons', color: 'black', size: 25}}
+        />
+      ),
+      headerRight: () => (
+        <Button
+          type="clear"
+          onPress={() => navigation.navigate(pages.login)}
+          icon={{name: 'person', type: 'Ionicons', color: 'black', size: 25}}
+        />
+      ),
+    };
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: '',
+    };
+  }
 
   updateSearch = value => {
     this.setState({
@@ -44,31 +70,23 @@ class HomeScreen extends React.Component {
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <View style={styles.logoview}>
-            <Button
-              style={styles.menustyle}
-              onPress={() => this.props.navigation.openDrawer()}
-              type="outline"
-              icon={<Icon name="md-menu" color="black" size={25} />}
-            />
-            <Text style={styles.logostyle}>iFamuzza</Text>
-            <Button
-              style={styles.signbutton}
-              onPress={() => this.props.navigation.navigate(pages.login)}
-              type="outline"
-              icon={<Icon name="md-person" color="black" size={25} />}
-            />
-          </View>
-          <View style={styles.searchbutton}>
+          <Image
+            source={{uri: 'https://picsum.photos/400/200'}}
+            style={{width: screenWidth, height: 200}}
+          />
+          <View style={styles.searchfield}>
             <TextInput
               style={styles.input}
-              placeholder="Search your favourite restaurant.."
+              fontSize={18}
+              placeholder="Search your favourite restaurant..."
               onChangeText={this.updateSearch}
               value={this.state.search}
             />
             <Button
-              type="outline"
-              icon={<Icon name="md-search" color="black" size={25} />}
+              containerStyle={styles.searchbutton}
+              buttonStyle={{borderRadius: 0}}
+              type="solid"
+              icon={<Icon name="md-search" color="white" size={25} />}
               onPress={this.addSearch}
             />
           </View>
@@ -82,40 +100,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  signbutton: {
-    left: 85,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   logostyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
     fontSize: 30,
     fontWeight: 'bold',
-    right: 20,
   },
-  logoview: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    bottom: 345,
-    left: 20,
+  searchfield: {
     flexDirection: 'row',
-  },
-  menustyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 125,
-  },
-  searchbutton: {
-    flexDirection: 'row',
-    borderColor: 'black',
+    borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 4,
+    width: '95%',
+    overflow: 'hidden',
+    marginTop: -22,
+    backgroundColor: 'white',
   },
   input: {
-    width: '80%',
+    flex: 6,
+    paddingLeft: 10,
+  },
+  searchbutton: {
+    flex: 1,
+    height: 41,
   },
 });
 
