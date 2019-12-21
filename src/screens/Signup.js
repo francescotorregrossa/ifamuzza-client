@@ -9,10 +9,9 @@ import {
 } from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import pages from './pages';
-import Login from './Login';
+import pages from '../pages';
 
-class Profile extends React.Component {
+class Signup extends React.Component {
   emailIcon = () => <Icon name="envelope" size={20} color="black" />;
 
   passIcon = () => <Icon name="lock" size={20} color="black" />;
@@ -39,7 +38,7 @@ class Profile extends React.Component {
                 Register on{' '}
                 <Text
                   style={{color: 'blue', fontWeight: 'bold'}}
-                  onPress={() => this.props.navigation.navigate(pages.home)}>
+                  onPress={() => this.props.navigation.popToTop()}>
                   iFamuzza{' '}
                 </Text>
               </Text>
@@ -120,7 +119,7 @@ class Profile extends React.Component {
               Are you already registered on iFamuzza?
               <Text
                 style={styles.underline}
-                onPress={() => this.props.navigation.navigate(pages.login)}>
+                onPress={() => this.props.navigation.goBack()}>
                 Login{' '}
               </Text>
             </Text>
@@ -161,4 +160,4 @@ const styles = StyleSheet.create({
   italic: {fontStyle: 'italic'},
 });
 
-export default Profile;
+export default Signup;

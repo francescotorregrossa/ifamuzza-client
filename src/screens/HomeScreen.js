@@ -8,70 +8,71 @@ import {
   TextInput,
   StatusBar,
 } from 'react-native';
-import {SearchBar,Input,Button} from 'react-native-elements';
+import {SearchBar, Input, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DrawerActions from 'react-navigation';
 import pages from '../pages';
 
 class HomeScreen extends React.Component {
-  state ={
-    search: "",
+  state = {
+    search: '',
   };
-  updateSearch = (value) => {
-    this.setState({ 
+
+  updateSearch = value => {
+    this.setState({
       search: value,
       searchList: [],
     });
   };
 
   addSearch = () => {
-      if(this.state.search.trim()===''){
-        return
-      }
-      this.setState(prevState => {
-        return {
-          searchList: prevState.searchList.concat(prevState.search)
-        }
-      })
-      this.setState({search: ""})
-  }
+    if (this.state.search.trim() === '') {
+      return;
+    }
+    this.setState(prevState => {
+      return {
+        searchList: prevState.searchList.concat(prevState.search),
+      };
+    });
+    this.setState({search: ''});
+  };
 
   render() {
-    const { search } = this.state;
+    const {search} = this.state;
 
     return (
       <>
         <StatusBar barStyle="dark-content" />
-          <SafeAreaView style={styles.container}>
-            <View style={styles.logoview}> 
+        <SafeAreaView style={styles.container}>
+          <View style={styles.logoview}>
             <Button
-                style={styles.menustyle}
-                onPress={()=> this.props.navigation.openDrawer()} 
-                type="outline"
-                icon={<Icon name="md-menu" color="black" size={25} />}
-              />
+              style={styles.menustyle}
+              onPress={() => this.props.navigation.openDrawer()}
+              type="outline"
+              icon={<Icon name="md-menu" color="black" size={25} />}
+            />
             <Text style={styles.logostyle}>iFamuzza</Text>
             <Button
-                style={styles.signbutton}
-                onPress={() => this.props.navigation.navigate(pages.login)}
-                type="outline"
-                icon={<Icon name="md-person" color="black" size={25} />}
-              />
-            </View>  
-            <View style={styles.searchbutton}>
+              style={styles.signbutton}
+              onPress={() => this.props.navigation.navigate(pages.login)}
+              type="outline"
+              icon={<Icon name="md-person" color="black" size={25} />}
+            />
+          </View>
+          <View style={styles.searchbutton}>
             <TextInput
-                style={styles.input}
-                placeholder="Search your favourite restaurant.."
-                onChangeText={this.updateSearch}
-                value={this.state.search}
-              />
-              <Button 
+              style={styles.input}
+              placeholder="Search your favourite restaurant.."
+              onChangeText={this.updateSearch}
+              value={this.state.search}
+            />
+            <Button
               type="outline"
               icon={<Icon name="md-search" color="black" size={25} />}
               onPress={this.addSearch}
-              />
-            </View> 
-          </SafeAreaView>
+            />
+          </View>
+        </SafeAreaView>
       </>
     );
   }
@@ -79,11 +80,11 @@ class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  signbutton:{
+  signbutton: {
     left: 85,
     alignItems: 'center',
     justifyContent: 'center',
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     right: 20,
-    
   },
   logoview: {
     alignItems: 'center',
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
   },
-  input:{
+  input: {
     width: '80%',
   },
 });
