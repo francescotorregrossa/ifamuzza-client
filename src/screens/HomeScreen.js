@@ -10,11 +10,10 @@ import {
 } from 'react-native';
 import {SearchBar,Input,Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Login from './Login';
-import Profile from './Profile';
-import pages from './pages';
+import DrawerActions from 'react-navigation';
+import pages from '../pages';
 
-class Home extends React.Component {
+class HomeScreen extends React.Component {
   state ={
     search: "",
   };
@@ -47,7 +46,7 @@ class Home extends React.Component {
             <View style={styles.logoview}> 
             <Button
                 style={styles.menustyle}
-              //aggiungere apertura menu(info: about us, contact us , ..) onPress={() => } 
+                onPress={()=> this.props.navigation.openDrawer()} 
                 type="outline"
                 icon={<Icon name="md-menu" color="black" size={25} />}
               />
@@ -120,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;
