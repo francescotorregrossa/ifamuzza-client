@@ -11,16 +11,49 @@ import {
   TextInput,
 } from 'react-native';
 
+import Auth from '../model/Auth';
 import pages from '../pages';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
+  updateEmail = text => {
+    this.setState({email: text});
+  };
+
+  updatePassword = text => {
+    this.setState({password: text});
+  };
+
+  login = () => {
+    const {email, password} = this.state;
+    Auth.login(email, password)
+      .then(user => {
+        // this.props.navigation.goBack();
+        console.log('user', Auth.user, Auth.accessToken);
+      })
+      .catch(error => {
+        console.log('error', error.message);
+      });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.input}>
           <Input
             placeholder="email@address.com"
+            onChangeText={this.updateEmail}
             label=" Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
             labelStyle={{
               color: 'black',
               fontSize: 20,
@@ -36,8 +69,12 @@ class Login extends React.Component {
         <View style={styles.input}>
           <Input
             placeholder="password"
+            onChangeText={this.updatePassword}
             label=" Password"
             secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            // keyboardType="visible-password"
             labelStyle={{
               color: 'black',
               fontSize: 20,
@@ -53,7 +90,7 @@ class Login extends React.Component {
         </View>
         <View style={styles.input}>
           <Button
-            onPress={() => this.props.navigation.goBack()}
+            onPress={this.login}
             type="outline"
             title="LOGIN"
             titleStyle={{
