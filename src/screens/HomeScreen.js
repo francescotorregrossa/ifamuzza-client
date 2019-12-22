@@ -112,16 +112,17 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: '95%',
     overflow: 'hidden',
-    marginTop: -22,
+    marginTop: -20,
     backgroundColor: 'white',
   },
   input: {
     flex: 6,
     paddingLeft: 10,
+    height: 40,
   },
   searchbutton: {
     flex: 1,
-    height: 41,
+    height: 40,
   },
 });
 
