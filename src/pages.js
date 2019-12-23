@@ -6,4 +6,9 @@ const pages = {
   orders: 'Orders',
 };
 
-export default pages;
+const pageIcons = {
+  [pages.home]: 'home',
+  [pages.orders]: 'list',
+};
+
+export {pages as default, pageIcons};

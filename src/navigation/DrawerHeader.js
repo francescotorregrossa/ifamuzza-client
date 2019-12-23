@@ -38,8 +38,8 @@ const DrawerHeader = function(props) {
       style={{backgroundColor: '#eee', alignItems: 'center'}}>
       <Avatar
         containerStyle={{marginTop: 25}}
-        size="medium"
-        icon={{name: 'person', type: 'Ionicons', size: 32}}
+        size="large"
+        icon={{name: 'person', type: 'Ionicons', size: 48}}
         // title={firstName[0] + lastName[0]}
         rounded
       />

@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
-import pages from '../pages';
+import pages, {pageIcons} from '../pages';
 import Auth from '../model/Auth';
 import DrawerHeader from './DrawerHeader';
 
@@ -26,9 +26,11 @@ function DrawerContent(props) {
             titleStyle={{
               fontSize: 18,
               color: 'black',
+              fontWeight:
+                props.activeItemKey === section.key ? 'bold' : 'normal',
             }}
             icon={{
-              name: 'home',
+              name: pageIcons[section.key],
               size: 30,
               color: 'black',
             }}
