@@ -33,10 +33,11 @@ class Login extends React.Component {
 
   login = () => {
     const {email, password} = this.state;
-    Auth.login(email, password)
+    Auth.instance
+      .login(email, password)
       .then(user => {
         // this.props.navigation.goBack();
-        console.log('user', Auth.user, Auth.accessToken);
+        console.log('user', Auth.instance.user, Auth.instance.accessToken);
       })
       .catch(error => {
         console.log('error', error.message);

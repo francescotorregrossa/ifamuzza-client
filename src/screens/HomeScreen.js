@@ -17,26 +17,6 @@ import pages from '../pages';
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 class HomeScreen extends React.Component {
-  static navigationOptions = ({navigation}) => {
-    return {
-      headerTitle: () => <Text style={styles.logostyle}>iFamuzza</Text>,
-      headerLeft: () => (
-        <Button
-          type="clear"
-          onPress={() => navigation.openDrawer()}
-          icon={{name: 'menu', type: 'Ionicons', color: 'black', size: 25}}
-        />
-      ),
-      headerRight: () => (
-        <Button
-          type="clear"
-          onPress={() => navigation.navigate(pages.login)}
-          icon={{name: 'person', type: 'Ionicons', color: 'black', size: 25}}
-        />
-      ),
-    };
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -100,10 +80,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-  },
-  logostyle: {
-    fontSize: 30,
-    fontWeight: 'bold',
   },
   searchfield: {
     flexDirection: 'row',
