@@ -10,8 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {SearchBar, Input, Button, Image} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
-import DrawerActions from 'react-navigation';
+import colors from '../colors';
 import pages from '../pages';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -64,9 +63,11 @@ class HomeScreen extends React.Component {
             leftIcon={{
               name: 'pin-drop',
               type: 'Ionicons',
+              color: colors.primary,
+              size: 32,
             }}
             leftIconContainerStyle={{
-              marginRight: -40,
+              marginRight: -48,
               zIndex: 1,
             }}
             value={this.state.search}
@@ -74,7 +75,11 @@ class HomeScreen extends React.Component {
 
           <Button
             containerStyle={styles.searchbutton}
-            buttonStyle={{margin: -1}}
+            buttonStyle={{
+              margin: -1,
+              backgroundColor: colors.primary,
+              height: 48,
+            }}
             type="solid"
             title="Find restaurants"
             onPress={this.addSearch}
@@ -105,7 +110,7 @@ const styles = StyleSheet.create({
     width: '95%',
     overflow: 'hidden',
     backgroundColor: 'white',
-    paddingLeft: 50,
+    paddingLeft: 60,
     height: 50,
   },
   searchbutton: {

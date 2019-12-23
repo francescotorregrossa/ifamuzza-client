@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import pages, {pageIcons} from '../pages';
+import colors from '../colors';
 import Auth from '../model/Auth';
 import DrawerHeader from './DrawerHeader';
 
@@ -25,14 +26,16 @@ function DrawerContent(props) {
             type="clear"
             titleStyle={{
               fontSize: 18,
-              color: 'black',
+              color:
+                props.activeItemKey === section.key ? colors.primary : 'black',
               fontWeight:
                 props.activeItemKey === section.key ? 'bold' : 'normal',
             }}
             icon={{
               name: pageIcons[section.key],
               size: 30,
-              color: 'black',
+              color:
+                props.activeItemKey === section.key ? colors.primary : 'black',
             }}
             iconContainerStyle={{
               paddingRight: 10,

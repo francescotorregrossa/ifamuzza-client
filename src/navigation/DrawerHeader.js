@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Text} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import colors from '../colors';
 
 const DrawerHeader = function(props) {
   const {user} = props;
@@ -18,13 +19,20 @@ const DrawerHeader = function(props) {
           containerStyle={{marginTop: 25}}
           size="large"
           icon={{name: 'person', type: 'Ionicons', size: 48}}
+          overlayContainerStyle={{backgroundColor: colors.primary}}
           // title={firstName[0] + lastName[0]}
           rounded
         />
         <Text style={{fontSize: 16, marginTop: 10}}>
           {`${firstName} ${lastName}`}
         </Text>
-        <Text style={{fontSize: 14, color: 'gray', marginBottom: 20}}>
+        <Text
+          style={{
+            fontSize: 14,
+            color: '#555',
+            fontWeight: '300',
+            marginBottom: 20,
+          }}>
           {email}
         </Text>
       </TouchableOpacity>
