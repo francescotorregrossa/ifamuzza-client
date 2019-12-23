@@ -11,6 +11,7 @@ import Profile from '../screens/Profile';
 import pages from '../pages';
 import DrawerContent from './DrawerContent';
 import Orders from '../screens/Orders';
+import Search from '../screens/Search';
 
 const DrawerNav = createDrawerNavigator(
   {
@@ -60,6 +61,12 @@ const StackNav = createStackNavigator(
     },
     [pages.signup]: {
       screen: Signup,
+    },
+    [pages.orders]: {
+      screen: Orders,
+    },
+    [pages.search]: {
+      screen: Search,
     },
   },
   {

@@ -4,6 +4,7 @@ const pages = {
   signup: 'Signup',
   profile: 'Profile',
   orders: 'Orders',
+  search: 'Search',
 };
 
 const pageIcons = {

@@ -39,6 +39,7 @@ class HomeScreen extends React.Component {
         searchList: prevState.searchList.concat(prevState.search),
       };
     });
+    this.props.navigation.navigate(pages.search, this.state.search);
     this.setState({search: ''});
   };
 
