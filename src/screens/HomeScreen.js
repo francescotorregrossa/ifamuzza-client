@@ -51,25 +51,42 @@ class HomeScreen extends React.Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Image
-            source={{uri: 'https://picsum.photos/400/200'}}
-            style={{width: screenWidth, height: 200}}
+            source={{uri: 'https://picsum.photos/400/250'}}
+            style={{width: screenWidth, height: 250}}
           />
-          <View style={styles.searchfield}>
-            <TextInput
-              style={styles.input}
-              fontSize={18}
-              placeholder="Search your favourite restaurant..."
-              onChangeText={this.updateSearch}
-              value={this.state.search}
-            />
-            <Button
-              containerStyle={styles.searchbutton}
-              buttonStyle={{borderRadius: 0}}
-              type="solid"
-              icon={<Icon name="md-search" color="white" size={25} />}
-              onPress={this.addSearch}
-            />
-          </View>
+
+          <Input
+            inputStyle={styles.searchfield}
+            inputContainerStyle={{borderBottomWidth: 0, marginTop: -60}}
+            placeholder="Your location"
+            placeholderTextColor="gray"
+            onChangeText={this.updateSearch}
+            leftIcon={{
+              name: 'pin-drop',
+              type: 'Ionicons',
+            }}
+            leftIconContainerStyle={{
+              marginRight: -40,
+              zIndex: 1,
+            }}
+            value={this.state.search}
+          />
+
+          <Button
+            containerStyle={styles.searchbutton}
+            buttonStyle={{margin: -1}}
+            type="solid"
+            title="Find restaurants"
+            onPress={this.addSearch}
+            /*
+            icon={{
+              name: 'search',
+              type: 'MaterialIcons',
+              color: 'white',
+              size: 25,
+            }}
+            */
+          />
         </SafeAreaView>
       </>
     );
@@ -82,23 +99,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchfield: {
-    flexDirection: 'row',
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 4,
     width: '95%',
     overflow: 'hidden',
-    marginTop: -20,
     backgroundColor: 'white',
-  },
-  input: {
-    flex: 6,
-    paddingLeft: 10,
-    height: 40,
+    paddingLeft: 50,
+    height: 50,
   },
   searchbutton: {
-    flex: 1,
-    height: 40,
+    width: '95%',
+    marginTop: 8,
   },
 });
 
