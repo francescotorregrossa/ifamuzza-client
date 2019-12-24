@@ -10,9 +10,8 @@ class Search extends React.Component {
     super(props);
     this.state = {
       loading: false,
+      query: props.navigation.state.params,
       data: [],
-      seed: 1,
-      page: 1,
       error: null,
       refreshing: false,
     };
@@ -23,21 +22,22 @@ class Search extends React.Component {
   }
 
   makeRemoteRequest = () => {
-    const {page, seed} = this.state;
-    const url =
-      'http://127.0.0.1:8080/api/search?address=Via%20Giuseppe%20Patricolo,%206,%20Palermo'; // link api
+    console.log('prova');
+    const url = `http://192.168.1.7:8080/api/search?address=${this.state.query}`;
     this.setState({loading: true});
     fetch(url)
       .then(res => res.json())
       .then(res => {
+        console.log('data: ', res);
         this.setState({
-          data: page === 1 ? res.results : [...this.state.data, ...res.results],
-          error: res.error || null,
+          data: res,
+          error: null,
           loading: false,
           refreshing: false,
         });
       })
       .catch(error => {
+        console.log('error: ', error.message);
         this.setState({
           error,
           loading: false,
@@ -49,15 +49,9 @@ class Search extends React.Component {
     return (
       <>
         <FlatList
-          // data={this.state.data}
-          renderItem={({item}) => (
-            <ListItem
-              roundAvatar
-              title={'${item.name.first}'}
-              avatar={{uri: item.picture.thumbnail}} // info sui locali presi dall'api, modificare se necessario
-            />
-          )}
-          keyExtractor={item => this.state.data[item].id}
+          data={this.state.data}
+          keyExtractor={item => `${item.id}`}
+          renderItem={({item}) => <Text>{item.name}</Text>}
         />
       </>
     );
