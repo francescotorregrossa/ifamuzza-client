@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Card, Button, Rating, Tile, Image} from 'react-native-elements';
 import {HeaderBackButton} from 'react-navigation-stack';
+import Spinner from 'react-native-spinkit';
 import Auth from '../model/Auth';
 import pages from '../pages';
 import colors from '../colors';
@@ -69,7 +70,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <>
+      <View style={{alignItems: 'center'}}>
         <FlatList
           data={this.state.data}
           keyExtractor={item => `${item.id}`}
@@ -127,7 +128,15 @@ class Search extends React.Component {
             </TouchableOpacity>
           )}
         />
-      </>
+
+        <Spinner
+          style={{marginTop: 50}}
+          size={50}
+          isVisible={this.state.loading}
+          type="Arc"
+          color={colors.primary}
+        />
+      </View>
     );
   }
 }
