@@ -1,19 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text} from 'react-native';
+import PropTypes from 'prop-types';
 import {Avatar} from 'react-native-elements';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../colors';
 
-const DrawerHeader = function(props) {
-  const {user} = props;
+function DrawerHeader(props) {
+  const {user, onPress} = props;
 
   if (user !== undefined) {
-    const {firstName, lastName, email} = user;
+    const {email} = user;
+
+    let fullName = '';
+    if (user.firstName !== undefined && user.lastName !== undefined) {
+      fullName = `${user.firstName} ${user.lastName}`;
+    } else if (user.firstName !== undefined) {
+      fullName = user.firstName;
+    } else if (user.lastName !== undefined) {
+      fullName = user.lastName;
+    }
 
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={props.onPress}
+        onPress={onPress}
         style={{backgroundColor: '#eee', alignItems: 'center'}}>
         <Avatar
           containerStyle={{marginTop: 25}}
@@ -23,9 +33,7 @@ const DrawerHeader = function(props) {
           // title={firstName[0] + lastName[0]}
           rounded
         />
-        <Text style={{fontSize: 16, marginTop: 10}}>
-          {`${firstName} ${lastName}`}
-        </Text>
+        <Text style={{fontSize: 16, marginTop: 10}}>{fullName}</Text>
         <Text
           style={{
             fontSize: 14,
@@ -42,7 +50,7 @@ const DrawerHeader = function(props) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={props.onPress}
+      onPress={onPress}
       style={{backgroundColor: '#eee', alignItems: 'center'}}>
       <Avatar
         containerStyle={{marginTop: 25}}
@@ -56,6 +64,19 @@ const DrawerHeader = function(props) {
       </Text>
     </TouchableOpacity>
   );
+}
+
+DrawerHeader.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+  }),
+  onPress: PropTypes.func.isRequired,
+};
+
+DrawerHeader.defaultProps = {
+  user: undefined,
 };
 
 export default DrawerHeader;
