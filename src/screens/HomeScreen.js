@@ -57,6 +57,7 @@ class HomeScreen extends React.Component {
 
     Geolocation.getCurrentPosition(
       position => {
+        console.log('Current location', position.coords);
         opencage
           .geocode({
             key: '94fb6718402f47f4be7355f37ed151cc',
@@ -79,7 +80,7 @@ class HomeScreen extends React.Component {
         console.log(error);
       },
       {
-        timeout: 1000,
+        timeout: 5000,
       },
     );
   }
@@ -89,7 +90,9 @@ class HomeScreen extends React.Component {
   };
 
   performSearch = () => {
-    this.props.navigation.navigate(pages.search, this.state.search);
+    if (this.state.search !== undefined) {
+      this.props.navigation.navigate(pages.search, this.state.search);
+    }
   };
 
   render() {
@@ -110,6 +113,7 @@ class HomeScreen extends React.Component {
             placeholder="Your location"
             placeholderTextColor="gray"
             onChangeText={this.updateSearch}
+            onSubmitEditing={this.performSearch}
             leftIcon={{
               name: 'pin-drop',
               type: 'Ionicons',
@@ -125,6 +129,7 @@ class HomeScreen extends React.Component {
 
           <Button
             containerStyle={styles.searchbutton}
+            activeOpacity={0.7}
             buttonStyle={{
               margin: -1,
               backgroundColor: colors.primary,
