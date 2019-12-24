@@ -45,10 +45,7 @@ async function androidRequestLocationPermission() {
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      search: '',
-      searchList: [],
-    };
+    this.state = {search: undefined};
   }
 
   componentDidMount() {
@@ -88,23 +85,11 @@ class HomeScreen extends React.Component {
   }
 
   updateSearch = value => {
-    this.setState({
-      search: value,
-      searchList: [],
-    });
+    this.setState({search: value === '' ? undefined : value});
   };
 
-  addSearch = () => {
-    if (this.state.search.trim() === '') {
-      return;
-    }
-    this.setState(prevState => {
-      return {
-        searchList: prevState.searchList.concat(prevState.search),
-      };
-    });
+  performSearch = () => {
     this.props.navigation.navigate(pages.search, this.state.search);
-    this.setState({search: ''});
   };
 
   render() {
@@ -147,7 +132,8 @@ class HomeScreen extends React.Component {
             }}
             type="solid"
             title="Find restaurants"
-            onPress={this.addSearch}
+            onPress={this.performSearch}
+            disabled={this.state.search === undefined}
             /*
             icon={{
               name: 'search',
