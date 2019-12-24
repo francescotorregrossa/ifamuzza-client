@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
+    "@react-native-community/geolocation": "^2.0.2",
     "native-base": "^2.13.8",
+    "opencage-api-client": "^0.5.1",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-native": "0.61.5",

@@ -10,6 +10,8 @@ import {
   Dimensions,
 } from 'react-native';
 import {SearchBar, Input, Button, Image} from 'react-native-elements';
+import Geolocation from '@react-native-community/geolocation';
+import opencage from 'opencage-api-client';
 import colors from '../colors';
 import pages from '../pages';
 
@@ -20,7 +22,29 @@ class HomeScreen extends React.Component {
     super(props);
     this.state = {
       search: '',
+      searchList: [],
     };
+  }
+
+  componentDidMount() {
+    Geolocation.requestAuthorization();
+
+    Geolocation.getCurrentPosition(position => {
+      opencage
+        .geocode({
+          key: '94fb6718402f47f4be7355f37ed151cc',
+          q: `${position.coords.latitude}, ${position.coords.longitude}`,
+        })
+        .then(response => {
+          const result = response.results[0];
+          if (result.formatted !== undefined) {
+            const {formatted} = result;
+            if (this.state.search === '') {
+              this.setState({search: formatted});
+            }
+          }
+        });
+    });
   }
 
   updateSearch = value => {
