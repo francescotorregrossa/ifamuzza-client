@@ -1,8 +1,7 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import {Avatar} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../colors';
 
 function DrawerHeader(props) {
