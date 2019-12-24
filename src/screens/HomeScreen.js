@@ -66,7 +66,7 @@ class HomeScreen extends React.Component {
             const result = response.results[0];
             if (result.formatted !== undefined) {
               const {formatted} = result;
-              if (this.state.search === '') {
+              if (this.state.search === undefined) {
                 this.setState({search: formatted});
               }
             }
