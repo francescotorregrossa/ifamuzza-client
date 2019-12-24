@@ -8,14 +8,39 @@ import {
   TextInput,
   StatusBar,
   Dimensions,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import {SearchBar, Input, Button, Image} from 'react-native-elements';
+
 import Geolocation from '@react-native-community/geolocation';
 import opencage from 'opencage-api-client';
 import colors from '../colors';
 import pages from '../pages';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
+
+async function androidRequestLocationPermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'iFamuzza Location Permission',
+        message: 'iFamuzza requires access to your location',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('Location permission granted');
+    } else {
+      console.log('Location permission denied');
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -27,24 +52,39 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    Geolocation.requestAuthorization();
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization();
+    } else {
+      androidRequestLocationPermission();
+    }
 
-    Geolocation.getCurrentPosition(position => {
-      opencage
-        .geocode({
-          key: '94fb6718402f47f4be7355f37ed151cc',
-          q: `${position.coords.latitude}, ${position.coords.longitude}`,
-        })
-        .then(response => {
-          const result = response.results[0];
-          if (result.formatted !== undefined) {
-            const {formatted} = result;
-            if (this.state.search === '') {
-              this.setState({search: formatted});
+    Geolocation.getCurrentPosition(
+      position => {
+        opencage
+          .geocode({
+            key: '94fb6718402f47f4be7355f37ed151cc',
+            q: `${position.coords.latitude}, ${position.coords.longitude}`,
+          })
+          .then(response => {
+            const result = response.results[0];
+            if (result.formatted !== undefined) {
+              const {formatted} = result;
+              if (this.state.search === '') {
+                this.setState({search: formatted});
+              }
             }
-          }
-        });
-    });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      error => {
+        console.log(error);
+      },
+      {
+        timeout: 1000,
+      },
+    );
   }
 
   updateSearch = value => {
