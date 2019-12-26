@@ -12,9 +12,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import pages from '../pages';
 
 class Signup extends React.Component {
-  emailIcon = () => <Icon name="envelope" size={20} color="black" />;
-
-  passIcon = () => <Icon name="lock" size={20} color="black" />;
 
   constructor(props) {
     super(props);
@@ -50,7 +47,13 @@ class Signup extends React.Component {
               placeholder="Enter your email"
               errorStyle={{color: 'red'}}
               errorMessage="Enter a valid email"
-              leftIcon={this.emailIcon}
+              leftIcon={{
+                type: 'font-awesome',
+                name: 'envelope',
+                color: 'gray',
+                size: 19, 
+                containerStyle: {marginRight: 16},
+              }}          
               // onChangeText={this.updateSearch}
               // value={this.state.insert}
             />
@@ -61,7 +64,12 @@ class Signup extends React.Component {
               // onChangeText={this.updateSearch}
               // value={this.state.insert}
               secureTextEntry
-              leftIcon={this.passIcon}
+              leftIcon={{
+                type: 'font-awesome',
+                name: 'lock',
+                color: 'gray',
+                containerStyle: {marginRight: 16},
+              }}        
             />
             <Input
               placeholder="Confirm your password"
@@ -70,7 +78,12 @@ class Signup extends React.Component {
               // onChangeText={this.updateSearch}
               // value={this.state.insert}
               secureTextEntry
-              leftIcon={this.passIcon}
+              leftIcon={{
+                type: 'font-awesome',
+                name: 'lock',
+                color: 'gray',
+                containerStyle: {marginRight: 16},
+              }}        
             />
             <Text style={{padding: 10, fontSize: 20}}> Optional </Text>
             <Input
