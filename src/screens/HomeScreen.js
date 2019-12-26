@@ -8,59 +8,91 @@ import {
   TextInput,
   StatusBar,
   Dimensions,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import {SearchBar, Input, Button, Image} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
-import DrawerActions from 'react-navigation';
+
+import Geolocation from '@react-native-community/geolocation';
+import opencage from 'opencage-api-client';
+import colors from '../colors';
 import pages from '../pages';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-class HomeScreen extends React.Component {
-  static navigationOptions = ({navigation}) => {
-    return {
-      headerTitle: () => <Text style={styles.logostyle}>iFamuzza</Text>,
-      headerLeft: () => (
-        <Button
-          type="clear"
-          onPress={() => navigation.openDrawer()}
-          icon={{name: 'menu', type: 'Ionicons', color: 'black', size: 25}}
-        />
-      ),
-      headerRight: () => (
-        <Button
-          type="clear"
-          onPress={() => navigation.navigate(pages.login)}
-          icon={{name: 'person', type: 'Ionicons', color: 'black', size: 25}}
-        />
-      ),
-    };
-  };
+async function androidRequestLocationPermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'iFamuzza Location Permission',
+        message: 'iFamuzza requires access to your location',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('Location permission granted');
+    } else {
+      console.log('Location permission denied');
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
 
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      search: '',
-    };
+    this.state = {search: undefined};
+  }
+
+  componentDidMount() {
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization();
+    } else {
+      androidRequestLocationPermission();
+    }
+
+    Geolocation.getCurrentPosition(
+      position => {
+        console.log('Current location', position.coords);
+        opencage
+          .geocode({
+            key: '94fb6718402f47f4be7355f37ed151cc',
+            q: `${position.coords.latitude}, ${position.coords.longitude}`,
+          })
+          .then(response => {
+            const result = response.results[0];
+            if (result.formatted !== undefined) {
+              const {formatted} = result;
+              if (this.state.search === undefined) {
+                this.setState({search: formatted});
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      error => {
+        console.log(error);
+      },
+      {
+        timeout: 5000,
+      },
+    );
   }
 
   updateSearch = value => {
-    this.setState({
-      search: value,
-      searchList: [],
-    });
+    this.setState({search: value === '' ? undefined : value});
   };
 
-  addSearch = () => {
-    if (this.state.search.trim() === '') {
-      return;
+  performSearch = () => {
+    if (this.state.search !== undefined) {
+      this.props.navigation.navigate(pages.search, this.state.search);
     }
-    this.setState(prevState => {
-      return {
-        searchList: prevState.searchList.concat(prevState.search),
-      };
-    });
-    this.setState({search: ''});
   };
 
   render() {
@@ -71,25 +103,51 @@ class HomeScreen extends React.Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Image
-            source={{uri: 'https://picsum.photos/400/200'}}
-            style={{width: screenWidth, height: 200}}
+            source={{uri: 'https://picsum.photos/400/250'}}
+            style={{width: screenWidth, height: 250}}
           />
-          <View style={styles.searchfield}>
-            <TextInput
-              style={styles.input}
-              fontSize={18}
-              placeholder="Search your favourite restaurant..."
-              onChangeText={this.updateSearch}
-              value={this.state.search}
-            />
-            <Button
-              containerStyle={styles.searchbutton}
-              buttonStyle={{borderRadius: 0}}
-              type="solid"
-              icon={<Icon name="md-search" color="white" size={25} />}
-              onPress={this.addSearch}
-            />
-          </View>
+
+          <Input
+            inputStyle={styles.searchfield}
+            inputContainerStyle={{borderBottomWidth: 0, marginTop: -60}}
+            placeholder="Your location"
+            placeholderTextColor="gray"
+            onChangeText={this.updateSearch}
+            onSubmitEditing={this.performSearch}
+            leftIcon={{
+              name: 'pin-drop',
+              type: 'Ionicons',
+              color: colors.primary,
+              size: 32,
+            }}
+            leftIconContainerStyle={{
+              marginRight: -48,
+              zIndex: 1,
+            }}
+            value={this.state.search}
+          />
+
+          <Button
+            containerStyle={styles.searchbutton}
+            activeOpacity={0.7}
+            buttonStyle={{
+              margin: -1,
+              backgroundColor: colors.primary,
+              height: 48,
+            }}
+            type="solid"
+            title="Find restaurants"
+            onPress={this.performSearch}
+            disabled={this.state.search === undefined}
+            /*
+            icon={{
+              name: 'search',
+              type: 'MaterialIcons',
+              color: 'white',
+              size: 25,
+            }}
+            */
+          />
         </SafeAreaView>
       </>
     );
@@ -101,27 +159,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  logostyle: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
   searchfield: {
-    flexDirection: 'row',
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 4,
     width: '95%',
     overflow: 'hidden',
-    marginTop: -22,
     backgroundColor: 'white',
-  },
-  input: {
-    flex: 6,
-    paddingLeft: 10,
+    paddingLeft: 60,
+    height: 50,
   },
   searchbutton: {
-    flex: 1,
-    height: 41,
+    width: '95%',
+    marginTop: 8,
   },
 });
 

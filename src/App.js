@@ -1,12 +1,8 @@
 import React from 'react';
-import AppNavigator from './navigation/AppNavigator';
+import SplashScreen from './screens/SplashScreen';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <>
-        <AppNavigator />
-      </>
-    );
-  }
+function App() {
+  return <SplashScreen />;
 }
+
+export default App;
