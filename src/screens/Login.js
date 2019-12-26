@@ -23,6 +23,7 @@ class Login extends React.Component {
     };
   }
 
+
   updateEmail = text => {
     this.setState({email: text});
   };
@@ -37,13 +38,16 @@ class Login extends React.Component {
       .then(user => {
         // this.props.navigation.goBack();
         console.log('user', Auth.user, Auth.accessToken);
+        this.setState({utenteAutenticato: true});
       })
       .catch(error => {
         console.log('error', error.message);
+        
       });
   };
 
   render() {
+    
     return (
       <View style={styles.container}>
         <View style={styles.input}>
@@ -53,6 +57,7 @@ class Login extends React.Component {
             label=" Email"
             keyboardType="email-address"
             autoCapitalize="none"
+            errorMessage= {this.erroreM}
             autoCorrect={false}
             labelStyle={{
               color: 'black',
@@ -88,38 +93,25 @@ class Login extends React.Component {
             }}
           />
         </View>
-        <View style={styles.input}>
+        <View style={{marginTop: 30}}>
           <Button
             onPress={this.login}
-            type="outline"
-            title="LOGIN"
+            type="solid"
+            title="Login"
             titleStyle={{
               fontWeight: 'bold',
               fontSize: 20,
             }}
           />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-          }}>
-          <Text
-            style={{
-              marginTop: 25,
-              textAlign: 'auto',
-              fontSize: 18,
-            }}>
-            Aren't you registered yet?
-          </Text>
+        <View style ={styles.input}>
           <Button
             onPress={() => this.props.navigation.navigate(pages.signup)}
-            type="clear"
-            title="Sign in"
+            type="outline"
+            title="Sign In"
             titleStyle={{
-              marginTop: 13,
               fontWeight: 'bold',
               fontSize: 20,
-              textDecorationLine: 'underline',
             }}
           />
         </View>
