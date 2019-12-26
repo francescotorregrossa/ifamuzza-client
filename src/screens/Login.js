@@ -15,6 +15,12 @@ import Auth from '../model/Auth';
 import pages from '../pages';
 
 class Login extends React.Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: 'Login',
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +28,6 @@ class Login extends React.Component {
       password: '',
     };
   }
-
 
   updateEmail = text => {
     this.setState({email: text});
@@ -42,12 +47,10 @@ class Login extends React.Component {
       })
       .catch(error => {
         console.log('error', error.message);
-        
       });
   };
 
   render() {
-    
     return (
       <View style={styles.container}>
         <View style={styles.input}>
@@ -57,7 +60,7 @@ class Login extends React.Component {
             label=" Email"
             keyboardType="email-address"
             autoCapitalize="none"
-            errorMessage= {this.erroreM}
+            errorMessage={this.erroreM}
             autoCorrect={false}
             labelStyle={{
               color: 'black',
@@ -104,7 +107,7 @@ class Login extends React.Component {
             }}
           />
         </View>
-        <View style ={styles.input}>
+        <View style={styles.input}>
           <Button
             onPress={() => this.props.navigation.navigate(pages.signup)}
             type="outline"

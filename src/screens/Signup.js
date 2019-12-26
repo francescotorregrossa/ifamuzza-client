@@ -12,6 +12,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import pages from '../pages';
 
 class Signup extends React.Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: 'Signup',
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -179,7 +185,7 @@ class Signup extends React.Component {
             <Input
               placeholder="Payment method"
               label="Payment method"
-              autoCapitalize="on"
+              autoCapitalize="sentences"
               autoCorrect={false}
               labelStyle={{
                 color: 'black',
