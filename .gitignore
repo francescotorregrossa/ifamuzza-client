@@ -2,6 +2,8 @@
 #
 .DS_Store
 
+*.code-workspace
+
 # Xcode
 #
 build/
