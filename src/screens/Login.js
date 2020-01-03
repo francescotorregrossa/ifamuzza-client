@@ -17,7 +17,7 @@ import pages from '../pages';
 class Login extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
-      headerTitle: 'Login',
+      headerTitle: 'Log In',
     };
   };
 
@@ -100,7 +100,7 @@ class Login extends React.Component {
           <Button
             onPress={this.login}
             type="solid"
-            title="Login"
+            title="Log In"
             titleStyle={{
               fontWeight: 'bold',
               fontSize: 20,
