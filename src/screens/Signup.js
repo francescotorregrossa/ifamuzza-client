@@ -14,26 +14,131 @@ import pages from '../pages';
 class Signup extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
-      headerTitle: 'Signup',
+      headerTitle: 'Sign In',
     };
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      insert: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      firstName: '',
+      lastName: '',
+      phone: '',
+      allergies: '',
+      address: '',
+      paymentMethod: '',
+      emailMessage: '',
+      passwordMessage: '',
+      confirmPasswordMessage: '',
+      firstNameMessage: '',
+      lastNameMessage: '',
+      phoneMessage: '',
+      allergiesMessage: '',
+      addressMessage: '',
+      paymentMethodMessage: '',
     };
   }
 
-  updateSearch = value => {
-    this.setState({
-      insert: value,
-      insertList: [],
-    });
+  updateEmail = text => {
+    this.setState({email: text});
+  };
+
+  updatePassword = text => {
+    this.setState({password: text});
+  };
+
+  updateConfirmPassword = text => {
+    this.setState({confirmPassword: text});
+  };
+
+  updateFirstName = text => {
+    this.setState({firstName: text});
+  };
+
+  updateLastName = text => {
+    this.setState({lastName: text});
+  };
+
+  updatePhone = text => {
+    this.setState({phone: text});
+  };
+
+  updateAllergies = text => {
+    this.setState({allergies: text});
+  };
+
+  updateAddress = text => {
+    this.setState({address: text});
+  };
+
+  updatePaymentMethod = text => {
+    this.setState({paymentMethod: text});
+  };
+
+  signup = () => {
+    this.setState({emailMessage: ''});
+    this.setState({passwordMessage: ''});
+    this.setState({confirmPasswordMessage: ''});
+    this.setState({firstNameMessage: ''});
+    this.setState({lastNameMessage: ''});
+    this.setState({phoneMessage: ''});
+    this.setState({allergiesMessage: ''});
+    this.setState({addressMessage: ''});
+    this.setState({paymentMethodMessage: ''});
+
+    const {email, password} = this.state;
+    Auth.instance
+      .signup(email, password)
+      .then(user => {
+        // this.props.navigation.goBack();
+        console.log('user', Auth.instance.user, Auth.instance.accessToken);
+      })
+      .catch(error => {
+        console.log('error', error.message);
+
+        /* if (error.message === '') {
+          this.setState({emailMessage: 'Enter a valid email'});
+        } */
+        if (error.message === 'email') {
+          this.setState({emailMessage: 'Enter a valid email'});
+        }
+        if (error.message === 'password') {
+          this.setState({passwordMessage: 'Enter a valid password'});
+        }
+        if (error.message === 'confirmPassword') {
+          this.setState({confirmPasswordMessage: 'Enter a valid password'});
+        }
+        if (error.message === 'firstName') {
+          this.setState({
+            firstNameMessage: 'This field can only contain letters (Max 20)',
+          });
+        }
+        if (error.message === 'lastName') {
+          this.setState({
+            lastNameMessage: 'This field can only contain letters (Max 20)',
+          });
+        }
+        if (error.message === 'phone') {
+          this.setState({
+            phoneMessage: 'This field can only contain numbers (Exactly 10)',
+          });
+        }
+        if (error.message === 'allergies') {
+          this.setState({allergiesMessage: ''});
+        }
+        if (error.message === 'address') {
+          this.setState({addressMessage: 'Invalid shipping address'});
+        }
+        if (error.message === 'paymentMethod') {
+          this.setState({paymentMethodMessage: 'Invalid payment method'});
+        }
+      });
   };
 
   render() {
-    const {insert} = this.state;
     return (
       <>
         <SafeAreaView style={styles.container}>
@@ -50,15 +155,15 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="Enter a valid email"
+              errorMessage={this.state.emailMessage}
               leftIcon={{
                 type: 'font-awesome',
                 name: 'envelope',
                 color: 'gray',
                 containerStyle: {marginRight: 16},
               }}
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              onChangeText={this.updateEmail}
+              value={this.state.email}
             />
             <Input
               placeholder="Enter your password"
@@ -71,9 +176,9 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="Enter a valid password"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.passwordMessage}
+              onChangeText={this.updatePassword}
+              value={this.state.password}
               secureTextEntry
               leftIcon={{
                 type: 'font-awesome',
@@ -94,9 +199,9 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="The password must be the same as the one in the previous field"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.confirmPasswordMessage}
+              onChangeText={this.updateConfirmPassword}
+              value={this.state.confirmPassword}
               secureTextEntry
               leftIcon={{
                 type: 'font-awesome',
@@ -108,8 +213,8 @@ class Signup extends React.Component {
             />
             <Text style={{padding: 10, fontSize: 20}}> Optional </Text>
             <Input
-              placeholder="Name"
-              label="Name"
+              placeholder="First name"
+              label="First name"
               autoCapitalize="words"
               autoCorrect={false}
               labelStyle={{
@@ -118,13 +223,13 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="This field can only contain letters (Max 20)"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.firstNameMessage}
+              onChangeText={this.updateFirstName}
+              value={this.state.firstName}
             />
             <Input
-              placeholder="Surname"
-              label="Surname"
+              placeholder="Last name"
+              label="Last name"
               autoCapitalize="words"
               autoCorrect={false}
               labelStyle={{
@@ -133,9 +238,9 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="This field can only contain letters (Max 20)"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.lastNameMessage}
+              onChangeText={this.updateLastName}
+              value={this.state.lastName}
             />
             <Input
               placeholder="Phone"
@@ -147,9 +252,9 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="This field can only contain numbers (Exactly 10)"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.phoneMessage}
+              onChangeText={this.updatePhone}
+              value={this.state.phone}
             />
             <Input
               placeholder="Allergies"
@@ -162,9 +267,9 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage=""
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.allergiesMessage}
+              onChangeText={this.updateAllergies}
+              value={this.state.allergies}
             />
             <Input
               placeholder="Shipping address"
@@ -178,9 +283,9 @@ class Signup extends React.Component {
                 marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="Invalid shipping address"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.addressMessage}
+              onChangeText={this.updateAddress}
+              value={this.state.address}
             />
             <Input
               placeholder="Payment method"
@@ -193,9 +298,9 @@ class Signup extends React.Component {
                 marginLeft: 3,
               }}
               errorStyle={{color: 'red'}}
-              errorMessage="Invalid payment method"
-              // onChangeText={this.updateSearch}
-              // value={this.state.insert}
+              errorMessage={this.state.paymentMethodMessage}
+              onChangeText={this.updatePaymentMethod}
+              value={this.state.paymentMethod}
             />
             <View style={{borderRadius: 70, padding: 10}}>
               <Button
