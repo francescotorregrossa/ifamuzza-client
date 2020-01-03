@@ -10,6 +10,7 @@ import {
 import {Input, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import pages from '../pages';
+import Auth from '../model/Auth';
 
 class Signup extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -89,9 +90,25 @@ class Signup extends React.Component {
     this.setState({addressMessage: ''});
     this.setState({paymentMethodMessage: ''});
 
-    const {email, password} = this.state;
+    const {
+      email, 
+      password, 
+      firstName, 
+      lastName, 
+      phone, 
+      allergies,
+      address,
+      paymentMethod} = this.state;
     Auth.instance
-      .signup(email, password)
+      .signup({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        allergies: allergies,
+        address: address,
+        paymentMethod: paymentMethod,
+      }, password)
       .then(user => {
         // this.props.navigation.goBack();
         console.log('user', Auth.instance.user, Auth.instance.accessToken);
