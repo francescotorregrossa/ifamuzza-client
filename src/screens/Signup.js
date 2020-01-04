@@ -7,8 +7,8 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {Input, Button,} from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
+import {Input, Button, ButtonGroup,} from 'react-native-elements';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import pages from '../pages';
 import Auth from '../model/Auth';
@@ -41,8 +41,24 @@ class Signup extends React.Component {
       allergiesMessage: '',
       addressMessage: '',
       paymentMethodMessage: '',
+      selectedIndex: 0,
+      selectedIndex2: 0,
     };
   }
+
+  updateIndex = (selectedIndex) => {
+    this.setState({selectedIndex});
+  };
+
+  updateIndex2 = () => {
+    if (this.state.selectedIndex2 === 0) {
+      this.setState({selectedIndex2: 1})
+    }
+    else {
+      this.setState({selectedIndex2: 0})
+    }
+    
+  };
 
   updateEmail = text => {
     this.setState({email: text});
@@ -157,11 +173,186 @@ class Signup extends React.Component {
   };
 
   render() {
-    let data = [{
-      value: 'Carta di credito',
-    }, {
-      value: 'Paypal',
-    }];
+    const buttons = ['Carta di credito', 'Paypal'];
+    const button = 'Optional';
+    const { selectedIndex } = this.state;
+    const { selectedIndex2 } = this.state;
+
+
+    const paymentMethod = (
+      this.state.selectedIndex === 0 
+      ? (<View>
+        <Input
+        placeholder = "Numero di carta"
+        label = "Numero di carta"
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        />
+        <View style = {{flexDirection : 'row'}}>
+        <Input 
+        containerStyle = {{width: "30%"}}
+        placeholder = "CCV"
+        label = "CCV"
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        />
+        <Input
+        placeholder = "Data di scadenza"
+        label = "Data di scadenza"
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        />
+        </View>
+      </View>)
+      : (<View>
+        <Input
+        placeholder = "Email"
+        label = "Email"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        />
+        <Input
+        placeholder = "Password"
+        label = "Password"
+        autoCapitalize="none"
+        autoCorrect={false}
+        secureTextEntry
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        />
+      </View>)
+    
+    );
+
+    const Optional = (
+      this.state.selectedIndex2 === 0
+      ? (<View></View>)
+      : (<View>        
+           <Input
+        placeholder="First name"
+        label="First name"
+        autoCapitalize="words"
+        autoCorrect={false}
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        errorStyle={{color: 'red'}}
+        errorMessage={this.state.firstNameMessage}
+        onChangeText={this.updateFirstName}
+        value={this.state.firstName}
+      />
+      <Input
+        placeholder="Last name"
+        label="Last name"
+        autoCapitalize="words"
+        autoCorrect={false}
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        errorStyle={{color: 'red'}}
+        errorMessage={this.state.lastNameMessage}
+        onChangeText={this.updateLastName}
+        value={this.state.lastName}
+      />
+      <Input
+        placeholder="Phone"
+        label="Phone"
+        keyboardType="phone-pad"
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        errorStyle={{color: 'red'}}
+        errorMessage={this.state.phoneMessage}
+        onChangeText={this.updatePhone}
+        value={this.state.phone}
+      />
+      <Input
+        placeholder="Allergies"
+        label="Allergies"
+        autoCapitalize="none"
+        autoCorrect={false}
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        errorStyle={{color: 'red'}}
+        errorMessage={this.state.allergiesMessage}
+        onChangeText={this.updateAllergies}
+        value={this.state.allergies}
+      />
+      <Input
+        placeholder="Shipping address"
+        label="Shipping address"
+        autoCapitalize="words"
+        autoCorrect={false}
+        labelStyle={{
+          color: 'black',
+          fontSize: 20,
+          marginLeft: 3,
+          marginTop: 13,
+        }}
+        errorStyle={{color: 'red'}}
+        errorMessage={this.state.addressMessage}
+        onChangeText={this.updateAddress}
+        value={this.state.address}
+      />
+      <Text style={{
+        padding: 10, 
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 8,
+        }}> Payment Method 
+      </Text>
+
+      <ButtonGroup
+        onPress={this.updateIndex}
+        selectedIndex={selectedIndex}
+        buttons={buttons}
+        containerStyle={{height: 50}}
+        textStyle={{
+          fontSize: 17,
+        }}
+      />
+  
+      {paymentMethod}
+      </View>)
+    );
+
+
     return (
       <>
         <SafeAreaView style={styles.container}>
@@ -240,106 +431,35 @@ class Signup extends React.Component {
                 containerStyle: {marginRight: 16},
               }}
             />
-            <Text style={{padding: 10, fontSize: 20}}> Optional </Text>
-            <Input
-              placeholder="First name"
-              label="First name"
-              autoCapitalize="words"
-              autoCorrect={false}
-              labelStyle={{
-                color: 'black',
-                fontSize: 20,
-                marginLeft: 3,
-              }}
-              errorStyle={{color: 'red'}}
-              errorMessage={this.state.firstNameMessage}
-              onChangeText={this.updateFirstName}
-              value={this.state.firstName}
-            />
-            <Input
-              placeholder="Last name"
-              label="Last name"
-              autoCapitalize="words"
-              autoCorrect={false}
-              labelStyle={{
-                color: 'black',
-                fontSize: 20,
-                marginLeft: 3,
-                marginTop: 13,
-              }}
-              errorStyle={{color: 'red'}}
-              errorMessage={this.state.lastNameMessage}
-              onChangeText={this.updateLastName}
-              value={this.state.lastName}
-            />
-            <Input
-              placeholder="Phone"
-              label="Phone"
-              keyboardType="phone-pad"
-              labelStyle={{
-                color: 'black',
-                fontSize: 20,
-                marginLeft: 3,
-                marginTop: 13,
-              }}
-              errorStyle={{color: 'red'}}
-              errorMessage={this.state.phoneMessage}
-              onChangeText={this.updatePhone}
-              value={this.state.phone}
-            />
-            <Input
-              placeholder="Allergies"
-              label="Allergies"
-              autoCapitalize="none"
-              autoCorrect={false}
-              labelStyle={{
-                color: 'black',
-                fontSize: 20,
-                marginLeft: 3,
-                marginTop: 13,
-              }}
-              errorStyle={{color: 'red'}}
-              errorMessage={this.state.allergiesMessage}
-              onChangeText={this.updateAllergies}
-              value={this.state.allergies}
-            />
-            <Input
-              placeholder="Shipping address"
-              label="Shipping address"
-              autoCapitalize="words"
-              autoCorrect={false}
-              labelStyle={{
-                color: 'black',
-                fontSize: 20,
-                marginLeft: 3,
-                marginTop: 13,
-              }}
-              errorStyle={{color: 'red'}}
-              errorMessage={this.state.addressMessage}
-              onChangeText={this.updateAddress}
-              value={this.state.address}
-            />
-            <Text style={{
-              padding: 10, 
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginTop: 8,
-              }}> Payment Method 
-            </Text>
-            <Dropdown
-              label = 'Select your payment method'
-              fontSize = {20}
-              baseColor = {'black'}
-              textColor = {'black'}
-              containerStyle = {{
-                marginLeft: 15,
-                marginRight: 5,
-               
-              }}
-              data = {data}
-            />
-            
-            <View style={{borderRadius: 70, padding: 10}}>
+                <View style = {{flexDirection : 'row'}}>
+                <Button 
+                icon={{
+                type: 'font-awesome',
+                name: 'sort-down',
+                color: 'gray',
+                size: 30,
+                paddingBottom: 10,
+                 }}
+                iconRight
+                title="Optional"
+                type="clear"
+                onPress = {this.updateIndex2}
+                containerStyle={{
+                  marginTop:15,
+                  marginLeft:5,
+                }}
+                titleStyle={{
+                  textAlign: 'left',
+                  fontWeight: 'bold',
+                  fontSize: 20,
+                }}
+                />
+                </View>
+                {Optional}
+
+ 
+
+            <View style={{borderRadius: 70, padding: 10, marginTop: 10}}>
               <Button
                 title="Create account"
                 type="solid"
