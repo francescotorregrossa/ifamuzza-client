@@ -26,6 +26,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      errore: '',
     };
   }
 
@@ -47,10 +48,13 @@ class Login extends React.Component {
       })
       .catch(error => {
         console.log('error', error.message);
+        this.setState({errore:'errore'})
       });
   };
 
   render() {
+    
+    
     return (
       <View style={styles.container}>
         <View style={styles.input}>
@@ -60,7 +64,6 @@ class Login extends React.Component {
             label=" Email"
             keyboardType="email-address"
             autoCapitalize="none"
-            errorMessage={this.erroreM}
             autoCorrect={false}
             labelStyle={{
               color: 'black',
