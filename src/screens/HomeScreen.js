@@ -18,6 +18,8 @@ import opencage from 'opencage-api-client';
 import colors from '../colors';
 import pages from '../pages';
 
+const image = require('../images/home.jpg');
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 async function androidRequestLocationPermission() {
@@ -102,10 +104,7 @@ class HomeScreen extends React.Component {
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <Image
-            source={{uri: 'https://picsum.photos/400/250'}}
-            style={{width: screenWidth, height: 250}}
-          />
+          <Image source={image} style={{width: screenWidth, height: 400}} />
 
           <Input
             inputStyle={styles.searchfield}
