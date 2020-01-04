@@ -7,7 +7,8 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {Input, Button} from 'react-native-elements';
+import {Input, Button,} from 'react-native-elements';
+import { Dropdown } from 'react-native-material-dropdown';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import pages from '../pages';
 import Auth from '../model/Auth';
@@ -156,10 +157,18 @@ class Signup extends React.Component {
   };
 
   render() {
+    let data = [{
+      value: 'Carta di credito',
+    }, {
+      value: 'Paypal',
+    }];
     return (
       <>
         <SafeAreaView style={styles.container}>
-          <ScrollView>
+          <ScrollView
+          showsVerticalScrollIndicator={false}
+          >
+
             <Input
               placeholder="Enter your email"
               label="Email"
@@ -170,6 +179,7 @@ class Signup extends React.Component {
                 color: 'black',
                 fontSize: 20,
                 marginLeft: 3,
+                marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
               errorMessage={this.state.emailMessage}
@@ -191,6 +201,7 @@ class Signup extends React.Component {
                 color: 'black',
                 fontSize: 20,
                 marginLeft: 3,
+                marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
               errorMessage={this.state.passwordMessage}
@@ -214,6 +225,7 @@ class Signup extends React.Component {
                 color: 'black',
                 fontSize: 20,
                 marginLeft: 3,
+                marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
               errorMessage={this.state.confirmPasswordMessage}
@@ -253,6 +265,7 @@ class Signup extends React.Component {
                 color: 'black',
                 fontSize: 20,
                 marginLeft: 3,
+                marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
               errorMessage={this.state.lastNameMessage}
@@ -267,6 +280,7 @@ class Signup extends React.Component {
                 color: 'black',
                 fontSize: 20,
                 marginLeft: 3,
+                marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
               errorMessage={this.state.phoneMessage}
@@ -282,6 +296,7 @@ class Signup extends React.Component {
                 color: 'black',
                 fontSize: 20,
                 marginLeft: 3,
+                marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
               errorMessage={this.state.allergiesMessage}
@@ -304,21 +319,26 @@ class Signup extends React.Component {
               onChangeText={this.updateAddress}
               value={this.state.address}
             />
-            <Input
-              placeholder="Payment method"
-              label="Payment method"
-              autoCapitalize="sentences"
-              autoCorrect={false}
-              labelStyle={{
-                color: 'black',
-                fontSize: 20,
-                marginLeft: 3,
+            <Text style={{
+              padding: 10, 
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginTop: 8,
+              }}> Payment Method 
+            </Text>
+            <Dropdown
+              label = 'Select your payment method'
+              fontSize = {20}
+              baseColor = {'black'}
+              textColor = {'black'}
+              containerStyle = {{
+                marginLeft: 15,
+                marginRight: 5,
+               
               }}
-              errorStyle={{color: 'red'}}
-              errorMessage={this.state.paymentMethodMessage}
-              onChangeText={this.updatePaymentMethod}
-              value={this.state.paymentMethod}
+              data = {data}
             />
+            
             <View style={{borderRadius: 70, padding: 10}}>
               <Button
                 title="Create account"
