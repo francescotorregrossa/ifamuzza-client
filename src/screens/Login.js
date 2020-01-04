@@ -15,6 +15,12 @@ import Auth from '../model/Auth';
 import pages from '../pages';
 
 class Login extends React.Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: 'Log In',
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +29,6 @@ class Login extends React.Component {
       errore: '',
     };
   }
-
 
   updateEmail = text => {
     this.setState({email: text});
@@ -98,14 +103,14 @@ class Login extends React.Component {
           <Button
             onPress={this.login}
             type="solid"
-            title="Login"
+            title="Log In"
             titleStyle={{
               fontWeight: 'bold',
               fontSize: 20,
             }}
           />
         </View>
-        <View style ={styles.input}>
+        <View style={styles.input}>
           <Button
             onPress={() => this.props.navigation.navigate(pages.signup)}
             type="outline"
