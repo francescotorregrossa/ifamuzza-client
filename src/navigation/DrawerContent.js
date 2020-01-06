@@ -49,6 +49,32 @@ function DrawerContent(props) {
             onPress={() => props.navigation.navigate(section.key)}
           />
         ))}
+
+        {Auth.instance.isLoggedIn() ? (
+          <Button
+            title="Logout"
+            type="clear"
+            titleStyle={{
+              fontSize: 18,
+              color: 'black',
+              fontWeight: 'normal',
+            }}
+            icon={{
+              name: 'sign-out-alt',
+              size: 30,
+              color: 'black',
+            }}
+            iconContainerStyle={{
+              paddingRight: 10,
+            }}
+            buttonStyle={{
+              justifyContent: 'flex-start',
+            }}
+            containerStyle={{
+              marginTop: 20,
+            }}
+          />
+        ) : null}
       </SafeAreaView>
     </ScrollView>
   );
