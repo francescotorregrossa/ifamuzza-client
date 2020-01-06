@@ -5,6 +5,8 @@ class Auth {
 
   accessToken = undefined;
 
+  baseUrl = '192.168.43.230';
+
   constructor(resolve) {
     AsyncStorage.getItem('@ifamuzza:accessToken')
       .then(result => {
@@ -64,7 +66,7 @@ class Auth {
         body: JSON.stringify({email, password}),
       };
 
-      fetch('http://localhost:8080/api/customerLogin', request)
+      fetch(`http://${this.baseUrl}:8080/api/customerLogin`, request)
         .then(response => {
           if (response.status !== 200) {
             throw new Error(response.headers.map.reason);
@@ -145,7 +147,7 @@ class Auth {
         body: JSON.stringify(body),
       };
 
-      fetch('http://localhost:8080/api/customerSignup', request)
+      fetch(`http://${this.baseUrl}:8080/api/customerSignup`, request)
         .then(response => {
           if (response.status !== 200) {
             throw new Error(response.headers.map.reason);
@@ -179,7 +181,7 @@ class Auth {
       this.accessToken = undefined;
       AsyncStorage.removeItem('@ifamuzza:accessToken');
 
-      fetch('http://localhost:8080/api/logout', request)
+      fetch(`http://${this.baseUrl}:8080/api/logout`, request)
         .then(response => {
           if (response.status !== 200) {
             throw new Error(response.headers.map.reason);

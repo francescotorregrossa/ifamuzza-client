@@ -42,7 +42,7 @@ class Search extends React.Component {
   }
 
   makeRemoteRequest = () => {
-    const url = `http://127.0.0.1:8080/api/search?address=${this.state.query}`;
+    const url = `http://${Auth.instance.baseUrl}:8080/api/search?address=${this.state.query}`;
     this.setState({loading: true});
     fetch(url)
       .then(res => res.json())
@@ -75,7 +75,7 @@ class Search extends React.Component {
           style={{marginTop: 50}}
           size={50}
           isVisible={this.state.loading}
-          type="Arc"
+          type="Pulse"
           color={colors.primary}
         />
         <FlatList
