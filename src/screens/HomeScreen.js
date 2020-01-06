@@ -11,10 +11,18 @@ import {
   Platform,
   PermissionsAndroid,
 } from 'react-native';
-import {SearchBar, Input, Button, Image} from 'react-native-elements';
+import {
+  SearchBar,
+  Input,
+  Button,
+  Image,
+  Rating,
+  AirbnbRating,
+} from 'react-native-elements';
 
 import Geolocation from '@react-native-community/geolocation';
 import opencage from 'opencage-api-client';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../colors';
 import pages from '../pages';
 
@@ -97,6 +105,10 @@ class HomeScreen extends React.Component {
     }
   };
 
+  ratingCompleted(rating) {
+    console.log(`Rating is: ${rating}`);
+  }
+
   render() {
     const {search} = this.state;
 
@@ -138,15 +150,61 @@ class HomeScreen extends React.Component {
             title="Find restaurants"
             onPress={this.performSearch}
             disabled={this.state.search === undefined}
-            /*
-            icon={{
-              name: 'search',
-              type: 'MaterialIcons',
-              color: 'white',
-              size: 25,
-            }}
-            */
           />
+          <Text
+            style={{
+              marginTop: 15,
+              fontWeight: 'bold',
+              fontSize: 20,
+            }}>
+            Most popular
+          </Text>
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <TouchableOpacity
+              style={styles.foodstyle}
+              activeOpacity={0.5}
+              onPress={this.performSearch}
+              disabled={this.state.search === undefined}>
+              <Image
+                source={require('../images/pizza.jpg')}
+                style={styles.imgstyle}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.foodstyle}
+              activeOpacity={0.5}
+              onPress={this.performSearch}
+              disabled={this.state.search === undefined}>
+              <Image
+                source={require('../images/hamburger.jpg')}
+                style={styles.imgstyle}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.foodstyle}
+              activeOpacity={0.5}
+              onPress={this.performSearch}
+              disabled={this.state.search === undefined}>
+              <Image
+                source={require('../images/kebab.jpg')}
+                style={styles.imgstyle}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.foodstyle}
+              activeOpacity={0.5}
+              onPress={this.performSearch}
+              disabled={this.state.search === undefined}>
+              <Image
+                source={require('../images/steak.jpg')}
+                style={styles.imgstyle}
+              />
+            </TouchableOpacity>
+          </ScrollView>
         </SafeAreaView>
       </>
     );
@@ -171,6 +229,21 @@ const styles = StyleSheet.create({
   searchbutton: {
     width: '95%',
     marginTop: 8,
+  },
+  foodstyle: {
+    width: 151,
+    height: 91,
+    marginTop: 15,
+    marginStart: 6,
+    borderWidth: 0.4,
+    alignItems: 'center',
+  },
+  imgstyle: {
+    alignItems: 'center',
+    borderColor: 'rgb(255, 255, 255)',
+    height: 90,
+    width: 155,
+    resizeMode: 'cover',
   },
 });
 
