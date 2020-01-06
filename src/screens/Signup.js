@@ -138,6 +138,9 @@ class Signup extends React.Component {
       .catch(error => {
         console.log('error', error.message);
 
+        if (error.message === 'Network request failed') {
+          this.setState({genericErrorMessage: 'Cannot connect to the server'});
+        }
         /* if (error.message === '') {
           this.setState({emailMessage: 'Enter a valid email'});
         } */
@@ -459,6 +462,9 @@ class Signup extends React.Component {
             {Optional}
 
             <View style={{borderRadius: 70, padding: 10, marginTop: 10}}>
+              <Text style={{color: 'red', fontSize: 12, paddingBottom: 4}}>
+                {this.state.genericErrorMessage}
+              </Text>
               <Button
                 title="Create account"
                 type="solid"
