@@ -7,6 +7,11 @@ import Auth from '../model/Auth';
 import DrawerHeader from './DrawerHeader';
 
 function DrawerContent(props) {
+  function logout() {
+    Auth.instance.logout();
+    props.navigation.closeDrawer();
+  }
+
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
@@ -60,7 +65,7 @@ function DrawerContent(props) {
               fontWeight: 'normal',
             }}
             icon={{
-              name: 'sign-out-alt',
+              name: 'exit-to-app',
               size: 30,
               color: 'black',
             }}
@@ -73,6 +78,7 @@ function DrawerContent(props) {
             containerStyle={{
               marginTop: 20,
             }}
+            onPress={() => logout()}
           />
         ) : null}
       </SafeAreaView>

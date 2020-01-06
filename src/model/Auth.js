@@ -167,6 +167,31 @@ class Auth {
         });
     });
   };
+
+  logout = () => {
+    return new Promise((resolve, reject) => {
+      const request = {
+        method: 'POST',
+        headers: {accessToken: this.accessToken},
+      };
+
+      this.user = undefined;
+      this.accessToken = undefined;
+      AsyncStorage.removeItem('@ifamuzza:accessToken');
+
+      fetch('http://localhost:8080/api/logout', request)
+        .then(response => {
+          if (response.status !== 200) {
+            throw new Error(response.headers.map.reason);
+          }
+          resolve();
+          return response;
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  };
 }
 
 export default Auth;
