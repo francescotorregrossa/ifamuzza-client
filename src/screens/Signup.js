@@ -188,7 +188,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         />
@@ -200,7 +200,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         />
@@ -210,7 +210,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         />
@@ -226,7 +226,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         />
@@ -239,7 +239,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         />
@@ -259,7 +259,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         errorStyle={{color: 'red'}}
@@ -275,7 +275,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         errorStyle={{color: 'red'}}
@@ -290,7 +290,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         errorStyle={{color: 'red'}}
@@ -306,7 +306,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         errorStyle={{color: 'red'}}
@@ -322,7 +322,7 @@ class Signup extends React.Component {
         labelStyle={{
           color: 'black',
           fontSize: 20,
-          marginLeft: 3,
+          
           marginTop: 13,
         }}
         errorStyle={{color: 'red'}}
@@ -369,7 +369,7 @@ class Signup extends React.Component {
               labelStyle={{
                 color: 'black',
                 fontSize: 20,
-                marginLeft: 3,
+                
                 marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
@@ -391,7 +391,7 @@ class Signup extends React.Component {
               labelStyle={{
                 color: 'black',
                 fontSize: 20,
-                marginLeft: 3,
+                
                 marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
@@ -415,7 +415,7 @@ class Signup extends React.Component {
               labelStyle={{
                 color: 'black',
                 fontSize: 20,
-                marginLeft: 3,
+                
                 marginTop: 13,
               }}
               errorStyle={{color: 'red'}}
