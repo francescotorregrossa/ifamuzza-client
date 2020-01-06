@@ -11,14 +11,7 @@ import {
   Platform,
   PermissionsAndroid,
 } from 'react-native';
-import {
-  SearchBar,
-  Input,
-  Button,
-  Image,
-  Rating,
-  AirbnbRating,
-} from 'react-native-elements';
+import {SearchBar, Input, Button, Image, Card} from 'react-native-elements';
 
 import Geolocation from '@react-native-community/geolocation';
 import opencage from 'opencage-api-client';
@@ -153,56 +146,135 @@ class HomeScreen extends React.Component {
           />
           <Text
             style={{
-              marginTop: 15,
+              marginTop: 35,
               fontWeight: 'bold',
-              fontSize: 20,
+              fontSize: 24,
             }}>
             Most popular
           </Text>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableOpacity
-              style={styles.foodstyle}
-              activeOpacity={0.5}
+              title="Pizza"
               onPress={this.performSearch}
               disabled={this.state.search === undefined}>
-              <Image
-                source={require('../images/pizza.jpg')}
-                style={styles.imgstyle}
-              />
+              <Card
+                image={require('../images/pizza.jpg')}
+                containerStyle={{
+                  marginTop: 20,
+                  marginLeft: 10,
+                  height: 60,
+                  width: 180,
+                }}>
+                <Button
+                  buttonStyle={{
+                    borderRadius: 8,
+                  }}
+                  title="Pizza"
+                />
+              </Card>
             </TouchableOpacity>
-
             <TouchableOpacity
-              style={styles.foodstyle}
-              activeOpacity={0.5}
+              title="Hamburger"
               onPress={this.performSearch}
               disabled={this.state.search === undefined}>
-              <Image
-                source={require('../images/hamburger.jpg')}
-                style={styles.imgstyle}
-              />
+              <Card
+                image={require('../images/hamburger.jpg')}
+                containerStyle={{
+                  marginTop: 20,
+                  marginLeft: 3,
+                  height: 60,
+                  width: 180,
+                }}>
+                <Button
+                  buttonStyle={{
+                    borderRadius: 8,
+                  }}
+                  title="Hamburger"
+                />
+              </Card>
             </TouchableOpacity>
-
             <TouchableOpacity
-              style={styles.foodstyle}
-              activeOpacity={0.5}
+              title="Kebab"
               onPress={this.performSearch}
               disabled={this.state.search === undefined}>
-              <Image
-                source={require('../images/kebab.jpg')}
-                style={styles.imgstyle}
-              />
+              <Card
+                image={require('../images/kebab.jpg')}
+                containerStyle={{
+                  marginTop: 20,
+                  marginLeft: 3,
+                  height: 60,
+                  width: 180,
+                }}>
+                <Button
+                  buttonStyle={{
+                    borderRadius: 8,
+                  }}
+                  title="Kebab"
+                  onPress={this.performSearch}
+                  disabled={this.state.search === undefined}
+                />
+              </Card>
             </TouchableOpacity>
-
             <TouchableOpacity
-              style={styles.foodstyle}
-              activeOpacity={0.5}
+              title="Steak House"
               onPress={this.performSearch}
               disabled={this.state.search === undefined}>
-              <Image
-                source={require('../images/steak.jpg')}
-                style={styles.imgstyle}
-              />
+              <Card
+                image={require('../images/steak.jpg')}
+                containerStyle={{
+                  marginTop: 20,
+                  marginLeft: 3,
+                  height: 60,
+                  width: 180,
+                }}>
+                <Button
+                  buttonStyle={{
+                    borderRadius: 8,
+                  }}
+                  title="Steak House"
+                />
+              </Card>
+            </TouchableOpacity>
+            <TouchableOpacity
+              title="Sushi"
+              onPress={this.performSearch}
+              disabled={this.state.search === undefined}>
+              <Card
+                image={require('../images/sushi.jpg')}
+                containerStyle={{
+                  marginTop: 20,
+                  marginLeft: 3,
+                  height: 60,
+                  width: 180,
+                }}>
+                <Button
+                  buttonStyle={{
+                    borderRadius: 8,
+                  }}
+                  title="Sushi"
+                />
+              </Card>
+            </TouchableOpacity>
+            <TouchableOpacity
+              title="Sandwiches"
+              onPress={this.performSearch}
+              disabled={this.state.search === undefined}>
+              <Card
+                image={require('../images/sandwiches.jpg')}
+                containerStyle={{
+                  marginTop: 20,
+                  marginLeft: 3,
+                  height: 60,
+                  width: 180,
+                }}>
+                <Button
+                  buttonStyle={{
+                    borderRadius: 8,
+                  }}
+                  title="Sandwiches"
+                />
+              </Card>
             </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>
@@ -237,13 +309,6 @@ const styles = StyleSheet.create({
     marginStart: 6,
     borderWidth: 0.4,
     alignItems: 'center',
-  },
-  imgstyle: {
-    alignItems: 'center',
-    borderColor: 'rgb(255, 255, 255)',
-    height: 90,
-    width: 155,
-    resizeMode: 'cover',
   },
 });
 
