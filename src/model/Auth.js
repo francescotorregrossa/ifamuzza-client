@@ -101,7 +101,6 @@ class Auth {
       }
 
       const body = {email: user.email, password};
-      // const paymentMethod = {};
 
       if (user.firstName !== '') {
         body.firstName = user.firstName;
@@ -158,12 +157,9 @@ class Auth {
           }
           this.accessToken = cookie.substr(start + 'accessToken='.length, 64);
           AsyncStorage.setItem('@ifamuzza:accessToken', this.accessToken);
-          return response;
-        })
-        .then(response => response.json())
-        .then(responseJson => {
-          this.user = responseJson;
+          this.user = body;
           resolve(this.user);
+          return response;
         })
         .catch(error => {
           this.user = undefined;

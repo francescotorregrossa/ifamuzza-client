@@ -43,18 +43,16 @@ class Login extends React.Component {
     Auth.instance
       .login(email, password)
       .then(user => {
-        // this.props.navigation.goBack();
+        this.props.navigation.popToTop();
         console.log('user', Auth.instance.user, Auth.instance.accessToken);
       })
       .catch(error => {
         console.log('error', error.message);
-        this.setState({errore:'errore'})
+        this.setState({errore: 'errore'});
       });
   };
 
   render() {
-    
-    
     return (
       <View style={styles.container}>
         <View style={styles.input}>
