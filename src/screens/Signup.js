@@ -178,7 +178,7 @@ class Signup extends React.Component {
   };
 
   render() {
-    const buttons = ['Carta di credito', 'Paypal'];
+    const buttons = ['Credit card', 'Paypal'];
     const button = 'Optional';
     const {selectedIndex} = this.state;
     const {selectedIndex2} = this.state;
@@ -187,8 +187,8 @@ class Signup extends React.Component {
       this.state.selectedIndex === 0 ? (
         <View>
           <Input
-            placeholder="Numero di carta"
-            label="Numero di carta"
+            placeholder="Card number"
+            label="Card number"
             labelStyle={{
               color: 'black',
               fontSize: 20,
@@ -209,8 +209,8 @@ class Signup extends React.Component {
               }}
             />
             <Input
-              placeholder="Data di scadenza"
-              label="Data di scadenza"
+              placeholder="Expiration date"
+              label="Expiration date"
               labelStyle={{
                 color: 'black',
                 fontSize: 20,
