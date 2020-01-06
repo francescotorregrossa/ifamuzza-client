@@ -26,7 +26,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      errore: '',
+      errorMessage: '',
     };
   }
 
@@ -40,21 +40,25 @@ class Login extends React.Component {
 
   login = () => {
     const {email, password} = this.state;
+    this.setState({errorMessage: ''});
     Auth.instance
       .login(email, password)
       .then(user => {
-        // this.props.navigation.goBack();
+        this.props.navigation.popToTop();
         console.log('user', Auth.instance.user, Auth.instance.accessToken);
       })
       .catch(error => {
         console.log('error', error.message);
-        this.setState({errore:'errore'})
+
+        if (error.message === 'Network request failed') {
+          this.setState({errorMessage: 'Cannot connect to the server'});
+        } else {
+          this.setState({errorMessage: "This user doesn't exist"});
+        }
       });
   };
 
   render() {
-    
-    
     return (
       <View style={styles.container}>
         <View style={styles.input}>
@@ -100,6 +104,9 @@ class Login extends React.Component {
           />
         </View>
         <View style={{marginTop: 30}}>
+          <Text style={{color: 'red', fontSize: 12, paddingBottom: 4}}>
+            {this.state.errorMessage}
+          </Text>
           <Button
             onPress={this.login}
             type="solid"
