@@ -106,9 +106,9 @@ class HomeScreen extends React.Component {
     const {search} = this.state;
 
     return (
-      <>
+      <View style={{flex: 1, alignItems: 'center'}}>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={{alignItems: 'center'}}>
           <Image source={image} style={{width: screenWidth, height: 400}} />
 
           <Input
@@ -153,7 +153,10 @@ class HomeScreen extends React.Component {
             Most popular
           </Text>
 
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            style={{marginBottom: 10}}
+            horizontal
+            showsHorizontalScrollIndicator={false}>
             <TouchableOpacity
               title="Pizza"
               onPress={this.performSearch}
@@ -163,7 +166,6 @@ class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 10,
-                  height: 60,
                   width: 180,
                 }}>
                 <Button
@@ -183,7 +185,6 @@ class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 3,
-                  height: 60,
                   width: 180,
                 }}>
                 <Button
@@ -203,7 +204,6 @@ class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 3,
-                  height: 60,
                   width: 180,
                 }}>
                 <Button
@@ -225,7 +225,6 @@ class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 3,
-                  height: 60,
                   width: 180,
                 }}>
                 <Button
@@ -245,7 +244,6 @@ class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 3,
-                  height: 60,
                   width: 180,
                 }}>
                 <Button
@@ -265,7 +263,6 @@ class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 3,
-                  height: 60,
                   width: 180,
                 }}>
                 <Button
@@ -277,17 +274,13 @@ class HomeScreen extends React.Component {
               </Card>
             </TouchableOpacity>
           </ScrollView>
-        </SafeAreaView>
-      </>
+        </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
   searchfield: {
     borderColor: 'gray',
     borderWidth: 1,

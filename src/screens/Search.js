@@ -70,7 +70,14 @@ class Search extends React.Component {
 
   render() {
     return (
-      <View style={{alignItems: 'center'}}>
+      <View style={{flex: 1, alignItems: 'center'}}>
+        <Spinner
+          style={{marginTop: 50}}
+          size={50}
+          isVisible={this.state.loading}
+          type="Arc"
+          color={colors.primary}
+        />
         <FlatList
           data={this.state.data}
           keyExtractor={item => `${item.id}`}
@@ -105,7 +112,12 @@ class Search extends React.Component {
                   }}
                 />
 
-                <Rating style={{marginTop: 15}} readonly imageSize={24} />
+                <Rating
+                  startingValue={4}
+                  style={{marginTop: 15}}
+                  readonly
+                  imageSize={24}
+                />
 
                 <Text
                   style={{
@@ -127,14 +139,6 @@ class Search extends React.Component {
               </Card>
             </TouchableOpacity>
           )}
-        />
-
-        <Spinner
-          style={{marginTop: 50}}
-          size={50}
-          isVisible={this.state.loading}
-          type="Arc"
-          color={colors.primary}
         />
       </View>
     );
