@@ -19,7 +19,7 @@ class Auth {
             headers: {accessToken: this.accessToken},
           };
 
-          fetch('http://localhost:8080/api/userForAccessToken', request)
+          fetch(`http://${this.baseUrl}:8080/api/userForAccessToken`, request)
             .then(response => {
               if (response.status !== 200) {
                 throw new Error(response.headers.map.reason);
