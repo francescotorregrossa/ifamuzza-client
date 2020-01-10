@@ -61,7 +61,7 @@ Una volta chiariti i requisiti, ci siamo dedicati alla **raccolta delle storie u
 
 ## Architettura e tecnologie usate
 
-![schema_logico](img/schema_logico.png)
+<p align="center"><img src="img/schema_logico.png"></p>
 
 Dopo aver preparato il backlog iniziale ci siamo dedicati alla scelta dell'architettura da utilizzare. In base al lavoro da fare e in base alle competenze prima descritte dei membri del team, abbiamo deciso di lavorare a tre programmi distinti:
 
@@ -73,10 +73,10 @@ Tutti e tre i software comunicheranno tramite protocollo **HTTPS** e si scambier
 
 Di seguito riportiamo gli schemi delle architetture **Model-View-Controller** che abbiamo seguito per implementare i due client.
 
-![mvc_clienti](img/mvc_cliente.png)
+<p align="center"><img src="img/mvc_cliente.png"></p>
 
 
-![mvc_locali](img/mvc_locale.png)
+<p align="center"><img src="img/mvc_locale.png"></p>
 
 Per entrambe le interfacce abbiamo deciso di usare il modello MVC così da separare logicamente la comunicazione col server dalla visualizzazione dei dati e dall'interazione con essi. Così facendo, anche se i software sono implementati con linguaggi diversi, non è stato difficile adattare il modello scelto ad entrambi i casi.
 
@@ -123,7 +123,7 @@ Sempre nella prima riunione abbiamo deciso il modello da seguire per l'implement
 
 
 
-![Sprint 1, Users](img/sprint_1/model_users.png)
+<p align="center"><img src="img/sprint_1/model_users.png"></p>
 
 
 
@@ -133,7 +133,7 @@ Abbiamo iniziato a descrivere il modello partendo dagli utenti. Tutti gli utenti
 
 
 
-![Sprint 1, Payment](img/sprint_1/model_payment_base.png)
+<p align="center"><img src="img/sprint_1/model_payment_base.png"></p>
 
 
 
@@ -143,7 +143,7 @@ Successivamente, è stato necessario specificare la struttura dei metodi di paga
 
 
 
-![Sprint 1, Strategy](img/sprint_1/model_payment_strategy.png)
+<p align="center"><img src="img/sprint_1/model_payment_strategy.png"></p>
 
 
 
@@ -151,7 +151,7 @@ Per permettere ai `Customer` di utilizzare soltanto metodi di pagamento, e non d
 
 
 
-![Sprint 1, Singleton](img/sprint_1/model_gui.png)
+<p align="center"><img src="img/sprint_1/model_gui.png"></p>
 
 
 
@@ -235,13 +235,13 @@ void negativeCustomerLoginTest() throws Exception {
 
 ### Risultato
 
-![Sprint 1, Customer Client](img/sprint_1/screen/customer.png)
+<p align="center"><img src="img/sprint_1/screen/customer.png"></p>
 
 A sinistra e al centro si vede la `GUIHomePage`, che permette di accedere a `GUICustomerLogin`, mostrata a destra.
 
 
 
-![Sprint 1, Restaurant Client](img/sprint_1/screen/restaurant.png)
+<p align="center"><img src="img/sprint_1/screen/restaurant.png"></p>
 
 A sinistra si vede la `GUIRestaurantLogin`, che permette di accedere a `GUIDashboard`, mostrata a destra, attualmente vuota.
 
@@ -263,7 +263,7 @@ Durante il secondo sprint il cliente ci ha contattati un'altra volta, chiedendoc
 
 ### UML e design pattern
 
-![Sprint 2, Profile](img/sprint_2/model_gui.png)
+<p align="center"><img src="img/sprint_2/model_gui.png"></p>
 
 Abbiamo creato una schermata per visualizzare e modificare il profilo dei clienti e una per i ristoranti. Entrambe prendono i dati dal singleton Auth e sono raggiungibili dalle rispettive schermate principali.
 
@@ -322,13 +322,13 @@ void validateTests() {
 
 ### Risultato
 
-![Sprint 2, Customer Client](img/sprint_2/screen/customer.png)
+<p align="center"><img src="img/sprint_2/screen/customer.png"></p>
 
 Questa è la `GUICustomerSignup`, accessibile da `GUICustomerLogin`, caratterizzata dal fatto che quasi tutti i dati sono opzionali.
 
 
 
-![Sprint 2, Restaurant Client](img/sprint_2/screen/restaurant.png)
+<p align="center"><img src="img/sprint_2/screen/restaurant.png"></p>
 
 A sinistra si vede la `GUIRestaurantSignup`, accessibile da `GUIRestaurantLogin`. A destra invece c'è la `GUIRestaurantProfile`, accessibile dalla dashboard una volta loggati, che permette di vedere e modificare i dati inseriti.
 
@@ -344,7 +344,7 @@ Abbiamo finito i task dello sprint precedente implementando la funzione di logou
 
 
 
-![Sprint 3, Users](img/sprint_3/model_users.png)
+<p align="center"><img src="img/sprint_3/model_users.png"></p>
 
 Abbiamo introdotto sul server due versioni della serializzazione: `serialize` e `publicSerialize`. La prima fornisce più informazioni della seconda, ed è utilizzata durante il login, in quanto un utente che effettua l'accesso riceverà tutti i suoi dati. La seconda invece riguarda l'interazione tra clienti e ristoranti, poiché include solamente i dati che devono essere pubblicamente visibili. Per esempio, quando un cliente effettua una ricerca, il server tralascerà i dati privati dei ristoranti, come quelli di pagamento. 
 
@@ -378,7 +378,7 @@ Alla fine del terzo sprint abbiamo deciso di eseguire dei **test di integrazione
 
 ### Risultato
 
-![Sprint 3, Users](img/sprint_3/screen/customer.png)
+<p align="center"><img src="img/sprint_3/screen/customer.png"></p>
 
 A sinistra si vede la schermata home con le funzioni che saranno usate per filtrare la ricerca, al centro si vede la schermata di ricerca e a destra il menù di un utente loggato con la funzione di logout.
 
